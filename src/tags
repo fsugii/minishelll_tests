@@ -1,0 +1,108 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/fshiniti/Documents/42_Porto/minishell/src/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+add_var_to_env	env/env_modify.c	/^void	add_var_to_env(char ***env, char *var)$/;"	f	typeref:typename:void
+apply_redir	exec/redirs.c	/^static int	apply_redir(char *file, int flags, int std_fd)$/;"	f	typeref:typename:int	file:
+argv_len	parser_utils.c	/^static int	argv_len(char **argv)$/;"	f	typeref:typename:int	file:
+build_full_word	lexer.c	/^static char	*build_full_word(char *line, int *i, int *no_expand, int *in_dquotes)$/;"	f	typeref:typename:char *	file:
+child_exit_with_cleanup	free.c	/^void	child_exit_with_cleanup(t_shell *shell, int code)$/;"	f	typeref:typename:void
+child_process	exec/child.c	/^void	child_process(t_cmd *cmd, int fd_in, int *fd_pipe, t_shell *shell)$/;"	f	typeref:typename:void
+cleanup_shell	free.c	/^void	cleanup_shell(t_shell *shell)$/;"	f	typeref:typename:void
+cmd_add_arg	parser_utils.c	/^void	cmd_add_arg(t_cmd *cmd, char *arg)$/;"	f	typeref:typename:void
+cmd_add_back	parser_utils.c	/^void	cmd_add_back(t_cmd **cmds, t_cmd *new_node)$/;"	f	typeref:typename:void
+copy_env	env/env_init.c	/^char	**copy_env(char **envp)$/;"	f	typeref:typename:char **
+count_env	env/env_init.c	/^static int	count_env(char **envp)$/;"	f	typeref:typename:int	file:
+exec_builtin	builtins/builtins_router.c	/^int	exec_builtin(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:int
+exec_single_builtin	exec/execute.c	/^static void	exec_single_builtin(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void	file:
+execute_pipe	exec/execute.c	/^void	execute_pipe(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void
+execution_error	exec/exec_errors.c	/^void	execution_error(char *cmd, int code)$/;"	f	typeref:typename:void
+executor	exec/execute.c	/^void	executor(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void
+exp_and_append	env/env_modify.c	/^static void	exp_and_append(char *arg, char ***env, char *equal_pos)$/;"	f	typeref:typename:void	file:
+expand_tokens	expander.c	/^void	expand_tokens(t_token	*tokens, char **env, int last_exit)$/;"	f	typeref:typename:void
+expand_tokens_safe	expander.c	/^int	expand_tokens_safe(t_token *tokens, char **env, int last_exit)$/;"	f	typeref:typename:int
+expand_vars	expander.c	/^char	*expand_vars(char *str, char **env, int last_exit)$/;"	f	typeref:typename:char *
+extract_and_expand_var	expander.c	/^static char	*extract_and_expand_var(char *str, int *i, char **env,$/;"	f	typeref:typename:char *	file:
+extract_quoted_content	lexer.c	/^static char	*extract_quoted_content(char *line, int *i, int *no_expand, int *in_dquotes)$/;"	f	typeref:typename:char *	file:
+find_path	exec/path.c	/^char	*find_path(char *cmd, char **envp)$/;"	f	typeref:typename:char *
+free_all	free.c	/^void	free_all(t_shell *shell)$/;"	f	typeref:typename:void
+free_cmds	free.c	/^void	free_cmds(t_cmd *cmds)$/;"	f	typeref:typename:void
+free_env	env/env_init.c	/^void	free_env(char **env)$/;"	f	typeref:typename:void
+free_redirs	free.c	/^static void	free_redirs(t_redir *redir)$/;"	f	typeref:typename:void	file:
+free_tab	utils/utils.c	/^void	free_tab(char **tab)$/;"	f	typeref:typename:void
+free_tokens	free.c	/^void	free_tokens(t_token *list)$/;"	f	typeref:typename:void
+ft_atoll_overflow	utils/utils.c	/^int	ft_atoll_overflow(const char *str, long long *res)$/;"	f	typeref:typename:int
+ft_cd	builtins/builtin_cd.c	/^int	ft_cd(char **args, char ***env)$/;"	f	typeref:typename:int
+ft_echo	builtins/builtins_info.c	/^int ft_echo(char **args)$/;"	f	typeref:typename:int
+ft_env	builtins/builtins_env.c	/^int	ft_env(char **args, char **env)$/;"	f	typeref:typename:int
+ft_exit	builtins/builtin_exit.c	/^int	ft_exit(char **args, t_shell *shell)$/;"	f	typeref:typename:int
+ft_export	builtins/builtins_env.c	/^int	ft_export(char **args, char ***env)$/;"	f	typeref:typename:int
+ft_isspace	utils/utils.c	/^int	ft_isspace(int c)$/;"	f	typeref:typename:int
+ft_pwd	builtins/builtins_info.c	/^int	ft_pwd(t_shell *shell)$/;"	f	typeref:typename:int
+ft_strcmp	utils/utils.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f	typeref:typename:int
+ft_unset	builtins/builtins_env.c	/^int	ft_unset(char **args, char ***env)$/;"	f	typeref:typename:int
+g_last_signal	signals/signals.c	/^int g_last_signal = 0; \/\/ Única variável global permitida$/;"	v	typeref:typename:int
+generate_temp_filename	heredoc.c	/^static char	*generate_temp_filename(void)$/;"	f	typeref:typename:char *	file:
+get_env_value	env/env_get.c	/^char	*get_env_value(char **env, char *key)$/;"	f	typeref:typename:char *
+get_matrix_len	env/env_get.c	/^int	get_matrix_len(char **env)$/;"	f	typeref:typename:int
+get_target_dir	builtins/builtin_cd.c	/^static void	*get_target_dir(char **args, char **env)$/;"	f	typeref:typename:void *	file:
+get_var_value	expander.c	/^static char	*get_var_value(char *var_name, char **env)$/;"	f	typeref:typename:char *	file:
+handle_exec_path	exec/child.c	/^static void	handle_exec_path(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void	file:
+handle_heredoc	heredoc.c	/^int	handle_heredoc(char *delimiter, char **env, int last_exit)$/;"	f	typeref:typename:int
+handle_pipes	exec/child.c	/^void	handle_pipes(t_cmd *cmd, int fd_in, int *fd_pipe)$/;"	f	typeref:typename:void
+handle_redir_in	parser.c	/^static void	handle_redir_in(t_cmd *current_cmd, t_token **tokens)$/;"	f	typeref:typename:void	file:
+handle_redir_out	lexer.c	/^static void	handle_redir_out(t_token **tokens, char *line, int *i)$/;"	f	typeref:typename:void	file:
+handle_redir_out	parser.c	/^static void	handle_redir_out(t_cmd *current_cmd, t_token **tokens)$/;"	f	typeref:typename:void	file:
+handle_redirection	exec/redirs.c	/^int	handle_redirection(t_cmd *cmd)$/;"	f	typeref:typename:int
+handle_sigint	signals/signals.c	/^void handle_sigint(int sig)$/;"	f	typeref:typename:void
+has_quotes	heredoc.c	/^static int	has_quotes(char *delimiter)$/;"	f	typeref:typename:int	file:
+i	main.c	/^	int	i;$/;"	v	typeref:typename:int
+init_shell	free.c	/^int	init_shell(t_shell *shell, char **envp)$/;"	f	typeref:typename:int
+is_builtin	builtins/builtins_router.c	/^int	is_builtin(char **args)$/;"	f	typeref:typename:int
+is_end_of_word	lexer.c	/^static int	is_end_of_word(char c)$/;"	f	typeref:typename:int	file:
+is_key_match	builtins/builtins_env.c	/^static int	is_key_match(char *env_var, char *key)$/;"	f	typeref:typename:int	file:
+is_right_assignment	exec/execute.c	/^static int	is_right_assignment(char *str)$/;"	f	typeref:typename:int	file:
+is_space	lexer_utils.c	/^int	is_space(char c)$/;"	f	typeref:typename:int
+is_special	lexer_utils.c	/^int	is_special(char c)$/;"	f	typeref:typename:int
+is_valid_key	env/env_modify.c	/^int	is_valid_key(char *str)$/;"	f	typeref:typename:int
+is_valid_n_flag	builtins/builtins_info.c	/^int	is_valid_n_flag(char *str)$/;"	f	typeref:typename:int
+is_var_char	expander.c	/^static int	is_var_char(char c)$/;"	f	typeref:typename:int	file:
+join_and_free	lexer_utils.c	/^char	*join_and_free(char *s1, char *s2)$/;"	f	typeref:typename:char *
+lexer	lexer.c	/^t_token	*lexer(char *line)$/;"	f	typeref:typename:t_token *
+main	main.c	/^int	main(int argc, char **argv, char **envp)$/;"	f	typeref:typename:int
+manage_pwd	builtins/builtin_cd.c	/^static void	manage_pwd(char ***env, char *old_pwd, char *target)$/;"	f	typeref:typename:void	file:
+new_cmd	parser_utils.c	/^t_cmd	*new_cmd(void)$/;"	f	typeref:typename:t_cmd *
+new_token	lexer_utils.c	/^t_token	*new_token(char *tk_str, t_token_type type)$/;"	f	typeref:typename:t_token *
+parser	parser.c	/^t_cmd	*parser(t_token *tokens, t_shell *shell)$/;"	f	typeref:typename:t_cmd *
+print_cd_error	builtins/builtin_cd.c	/^static void	print_cd_error(char *arg, int is_getcwd)$/;"	f	typeref:typename:void	file:
+print_cmds	debug.c	/^void	print_cmds(t_cmd *cmd)$/;"	f	typeref:typename:void
+print_env_debug	main.c	/^void	print_env_debug(char **my_env)$/;"	f	typeref:typename:void
+print_error_message	exec/exec_errors.c	/^static void	print_error_message(char *cmd, char *msg)$/;"	f	typeref:typename:void	file:
+print_export_line	builtins/export_print.c	/^static void	print_export_line(char *env_var)$/;"	f	typeref:typename:void	file:
+print_tokens	debug.c	/^void	print_tokens(t_token *tokens)$/;"	f	typeref:typename:void
+process_char	lexer.c	/^static void	process_char(t_token **tokens, char *line, int *i)$/;"	f	typeref:typename:void	file:
+process_heredocs	heredoc.c	/^void	process_heredocs(t_cmd *cmds, char **env, int last_exit)$/;"	f	typeref:typename:void
+process_token	parser.c	/^static void	process_token(t_cmd **cmds, t_cmd **current_cmd, t_token **tokens)$/;"	f	typeref:typename:void	file:
+read_heredoc_lines	heredoc.c	/^static void	read_heredoc_lines(int fd, char *delimiter, int expand,$/;"	f	typeref:typename:void	file:
+redir_add_back	parser_utils.c	/^void	redir_add_back(t_redir **list, t_redir *new_node)$/;"	f	typeref:typename:void
+remove_env_var	builtins/builtins_env.c	/^static void	remove_env_var(char *key, char ***env)$/;"	f	typeref:typename:void	file:
+remove_quotes	heredoc.c	/^static char	*remove_quotes(char *delimiter)$/;"	f	typeref:typename:char *	file:
+search_path	exec/path.c	/^static char	*search_path(char **paths, char *cmd)$/;"	f	typeref:typename:char *	file:
+setup_signals	signals/signals.c	/^void	setup_signals(void)$/;"	f	typeref:typename:void
+setup_signals_execution	signals/signals.c	/^void	setup_signals_execution(void)$/;"	f	typeref:typename:void
+shlvl_update	env/env_init.c	/^void	shlvl_update(char ***env)$/;"	f	typeref:typename:void
+show_export_list	builtins/export_print.c	/^void	show_export_list(char **env)$/;"	f	typeref:typename:void
+sort_env_matrix	builtins/export_print.c	/^static void	sort_env_matrix(char **matrix, int len)$/;"	f	typeref:typename:void	file:
+special_expand_params	utils/utils.c	/^char	*special_expand_params(char c, int last_exit)$/;"	f	typeref:typename:char *
+token_add_back	lexer_utils.c	/^void	token_add_back(t_token **tokens, t_token *new_node)$/;"	f	typeref:typename:void
+update_env	env/env_modify.c	/^void	update_env(char *arg, char ***env)$/;"	f	typeref:typename:void
+update_w_export	builtins/builtin_cd.c	/^static void	update_w_export(char ***env, char *key, char *value)$/;"	f	typeref:typename:void	file:
+validate_syntax	parser.c	/^static int	validate_syntax(t_token *tokens)$/;"	f	typeref:typename:int	file:
+wait_children	exec/execute.c	/^static void	wait_children(pid_t last_pid, t_shell *shell)$/;"	f	typeref:typename:void	file:

@@ -1,0 +1,2009 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 08:35:31 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:12 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_atoi(const char *nptr)
+{
+	int	signal;
+	int	result;
+
+	signal = 1;
+	result = 0;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '+')
+	{
+		nptr++;
+	}
+	else if (*nptr == '-')
+	{
+		signal = -signal;
+		nptr++;
+	}
+	while (*nptr >= 48 && *nptr <= 57)
+	{
+		result = (result * 10) + (*nptr - '0');
+		nptr++;
+	}
+	return (result * signal);
+}
+/*
+int	main(int ac, char **av)
+{
+	if (ac == 2)
+	{
+		printf("My atoi: %d\n", ft_atoi(av[1]));
+		printf("Real atoi: %d\n", atoi(av[1]));
+	}
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/10 21:04:37 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:19 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}
+/*
+int	main(void)
+{
+	char buffer[10] = "abcdefghij";
+	for (int i = 0; i < 10; i++)
+		printf("%c ", buffer[i]);
+	printf ("\n");
+	ft_bzero(buffer, 5);
+	for (int i = 0; i < 10; i++)
+		printf("%d ", buffer[i]);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/16 17:46:03 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:23:00 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*ptr;
+
+	if (size && nmemb > SIZE_MAX / size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+	(ft_memset(ptr, 0, nmemb * size));
+	return (ptr);
+}
+/*
+int main() 
+{
+    int n = 5; 
+    int *arr = (int *)ft_calloc(n, sizeof(int)); 
+
+    if (arr == NULL)
+    { 
+        printf("Erro ao alocar memória\n");
+        return 1;
+    }
+    for (int i = 0; i < n; i++) 
+    {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+    free(arr); 
+    return 0;
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 15:50:45 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:24:01 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_isalnum(int c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	else
+		return (0);
+}
+/*
+#include <ctype.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	int	c;
+
+	c = '/';
+	printf ("Resultado: %d\n", ft_isalnum(c));
+	c = '1';
+	printf ("Resultado: %d\n", isalnum(c));
+	c = 'a';
+	printf ("Resultado: %d\n", ft_isalnum(c));
+	c = 'B';
+	printf ("Resultado: %d\n", isalnum(c));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 01:10:09 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:30 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
+/*
+#include <ctype.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	int	c;
+
+	c = 'a';
+	printf ("meu: %d\n", ft_isalpha(c));
+	printf ("original: %d\n\n", isalpha(c));
+	c = '1';
+	printf ("meu: %d\n", ft_isalpha(c));
+	printf ("original: %d\n\n", isalpha(c));
+	c = 'A';
+	printf ("meu: %d\n", ft_isalpha(c));
+	printf ("original: %d\n", isalpha(c));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 18:55:33 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:36:56 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isascii(int c)
+{
+	if ((c >= 0 && c < 128))
+		return (1);
+	else
+		return (0);
+}
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int main(void)
+{
+	printf("%d\n", ft_isascii(127));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 02:33:30 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:35 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isdigit(int n)
+{
+	if (n >= '0' && n <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int	main(void)
+{
+	int	n;
+
+	n = '5';
+	printf ("Meu: %d\n", ft_isdigit(n));
+	printf ("Sistema: %d\n\n", isdigit(n));
+	n = 'b';
+	printf ("Meu: %d\n", ft_isdigit(n));
+	printf ("Sistema: %d\n\n", isdigit(n));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 22:05:29 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:38 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}
+/*
+#include <stdio.h>
+#include <ctype.h>
+
+int	main(void)
+{
+	int	c;
+
+	c = 'A';
+	printf ("Resultado: %d\n", ft_isprint(c));
+	c = 'A';
+	printf ("Resultado: %d\n", isprint(c));
+	c = '	';
+	printf ("Resultado: %d\n", ft_isprint(c));
+	c = '	';
+	printf ("Resultado: %d\n", isprint(c));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/20 20:50:58 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:08:55 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	ft_count_letters(long nb)
+{
+	int	len;
+
+	len = 0;
+	if (nb <= 0)
+	{
+		len++;
+	}
+	while (nb != 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	int			len;
+	long		nbr;
+	char		*result;
+
+	nbr = n;
+	if (nbr == 0)
+		return (ft_strdup("0"));
+	len = ft_count_letters(nbr);
+	result = malloc((len + 1) * sizeof (char));
+	if (!result)
+		return (NULL);
+	result[len--] = '\0';
+	if (nbr < 0)
+	{
+		result[0] = '-';
+		nbr = -nbr;
+	}
+	while (nbr != 0)
+	{
+		result[len--] = ((nbr % 10) + 48);
+		nbr = nbr / 10;
+	}
+	return (result);
+}
+/*
+#include <stdint.h>
+#include <limits.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	printf("string :%s\n", ft_itoa(INT32_MIN));
+	printf("string :%s\n", ft_itoa(INT32_MAX));
+	printf("string :%s\n", ft_itoa(-42));
+	printf("string :%s\n", ft_itoa(2));
+	printf("string :%s\n", ft_itoa(0));
+	printf("string :%s\n", ft_itoa(42));
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 17:19:58 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:46 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*temp;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	temp = ft_lstlast(*lst);
+	temp->next = new;
+}
+/*
+void	print_list(t_list *lst)
+{
+	while (lst)
+	{
+		printf("%s -> ", (char *)lst->content);
+		lst = lst->next;
+	}
+	printf("NULL\n");
+}
+
+int	main(void)
+{
+	t_list	*list = NULL;
+
+	t_list	*node1 = ft_lstnew(strdup("Node 1"));
+	t_list	*node2 = ft_lstnew(strdup("Node 2"));
+	t_list	*node3 = ft_lstnew(strdup("Node 3"));
+
+	ft_lstadd_back(&list, node1);
+	ft_lstadd_back(&list, node2);
+	ft_lstadd_back(&list, node3);
+
+	print_list(list);
+
+	t_list *tmp;
+	while (list)
+	{
+		tmp = list;
+		list = list->next;
+		free(tmp->content);
+		free(tmp);
+	}
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 16:01:21 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:48 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}
+/*
+int main(void)
+{
+	t_list *node1 = ft_lstnew("First");
+	t_list *node2 = ft_lstnew("Second");
+	t_list *node3 = ft_lstnew("Third");
+	t_list *node4 = ft_lstnew("FirstOfAll");
+	t_list *tmp;
+
+	node1->next = node2;
+	node2->next = node3;
+	node3->next = NULL;
+
+	ft_lstadd_front(&node1, node4);
+
+	printf("New First Content: %s\n", (char *)node1->content);
+
+	while (node1)
+{
+	tmp = node1->next;
+	free(node1);
+	node1 = tmp;
+}
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 04:31:59 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:50 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
+	}
+	free(*lst);
+	*lst = NULL;
+}
+/*
+void del(void *content)
+{
+    free(content);
+}
+
+int main()
+{
+    // Criando dois nós simples
+    t_list *node1 = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
+
+    // Preenchendo os nós
+    node1->content = malloc(10); // Por exemplo, alocando espaço 
+				 // para um dado qualquer
+    node1->next = node2;
+
+    node2->content = malloc(10); // Outro espaço para dado
+    node2->next = NULL;
+
+    // Ponteiro para o início da lista
+    t_list *lst = node1;
+
+    // Chamando ft_lstclear para limpar a lista
+    ft_lstclear(&lst, del);
+
+    // Verificando se a lista foi limpa (lst deve ser NULL)
+    if (lst == NULL)
+        printf("Lista limpa com sucesso.\n");
+    else
+        printf("Erro ao limpar a lista.\n");
+
+    return 0;
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 02:14:07 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:55 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
+}
+/*
+void	print_list(t_list *lst)
+{
+	while (lst)
+	{
+		printf ("%s ->", (char *)lst->content);
+		lst = lst->next;
+	}
+	printf ("NULL\n");
+}
+
+int	main(void)
+{
+	t_list *node1 = ft_lstnew(strdup("Node 1"));
+	t_list *node2 = ft_lstnew(strdup("Node 2"));
+	t_list *node3 = ft_lstnew(strdup("Node 3"));
+	t_list *node4 = ft_lstnew(strdup("Node 4"));
+
+	node1->next = node2;
+	node2->next = node3;
+	node3->next = node4;
+	node4->next = NULL;
+
+	printf("Lista original:\n");
+	t_list *temp = node1;
+	while (temp)
+	{
+		printf("%s -> ", (char *)temp->content);
+		temp = temp->next;
+	}
+	printf("NULL\n");
+
+	node1->next = node3;
+	ft_lstdelone(node2, free);
+
+	printf("\nLista após remover o segundo nó:\n");
+	temp = node1;
+	while (temp)
+	{
+		printf("%s -> ", (char *)temp->content);
+		temp = temp->next;
+	}
+	printf("NULL\n");
+
+	ft_lstdelone(node1, free);
+	ft_lstdelone(node3, free);
+	ft_lstdelone(node4, free);
+
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 16:01:46 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:46:59 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
+/*
+// Função auxiliar para aplicar em cada elemento
+void print_content(void *content)
+{
+    if (content)
+        printf("%s\n", (char *)content);
+}
+
+int main()
+{
+    // Criando uma lista encadeada simples
+    t_list *node1 = ft_lstnew("Primeiro");
+    t_list *node2 = ft_lstnew("Segundo");
+    t_list *node3 = ft_lstnew("Terceiro");
+
+    // Ligando os nós
+    node1->next = node2;
+    node2->next = node3;
+
+    // Iterando e aplicando a função print_content
+    printf("Conteúdo da lista:\n");
+    ft_lstiter(node1, print_content);
+
+    // Liberando memória alocada
+    free(node1);
+    free(node2);
+    free(node3);
+
+    return 0;
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 05:02:29 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:47:01 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+/*
+int main(void)
+{
+	t_list *node1 = ft_lstnew("First");
+	t_list *node2 = ft_lstnew("Second");
+	t_list *node3 = ft_lstnew("Third");
+
+	node1->next = node2;
+	node2->next = node3;
+	node3->next = NULL;
+
+	t_list *last = ft_lstlast(node1);
+
+	if (last)
+		printf("Last item content: %s\n", (char *)last->content);
+	else
+		printf("Empty list\n");
+
+	free(node1);
+	free(node2);
+	free(node3);
+
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/24 17:27:10 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 07:33:33 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*new_list;
+	t_list	*new_elem;
+	void	*content;
+
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
+	{
+		content = f(lst->content);
+		new_elem = ft_lstnew(content);
+		if (!new_elem)
+		{
+			del(content);
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, new_elem);
+		lst = lst->next;
+	}
+	return (new_list);
+}
+
+/*
+// Função de mapeamento: converte o conteúdo para maiúsculas
+void *to_uppercase(void *content)
+{
+    char *str = (char *)content;
+    char *new_str = strdup(str);
+    if (new_str)
+    {
+        for (int i = 0; new_str[i]; i++)
+            if (new_str[i] >= 'a' && new_str[i] <= 'z')
+                new_str[i] -= 32; // Converte para maiúscula
+    }
+    return new_str;
+}
+
+// Função para liberar o conteúdo da lista
+void delete_content(void *content)
+{
+    free(content);
+}
+
+int main(void)
+{
+    // Criando uma lista simples
+    t_list *node1 = ft_lstnew(strdup("abc"));
+    t_list *node2 = ft_lstnew(strdup("def"));
+    t_list *node3 = ft_lstnew(strdup("ghi"));
+
+    // Conectando os nós
+    ft_lstadd_back(&node1, node2);
+    ft_lstadd_back(&node1, node3);
+
+    // Aplicando ft_lstmap
+    t_list *new_list = ft_lstmap(node1, to_uppercase, delete_content);
+
+    // Exibindo conteúdo da nova lista
+    for (t_list *temp = new_list; temp; temp = temp->next)
+        printf("%s\n", (char *)temp->content);
+
+    // Limpando memória
+    ft_lstclear(&node1, delete_content);
+    ft_lstclear(&new_list, delete_content);
+
+    return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 21:43:38 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/23 20:44:40 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*item;
+
+	item = malloc(sizeof(t_list));
+	if (!item)
+		return (NULL);
+	item->content = content;
+	item->next = NULL;
+	return (item);
+}
+/*
+int	main(void)
+{
+	t_list *teste;
+
+	char str[] = "XPTO";
+	teste = ft_lstnew(str);
+	if (!teste)
+		return (1);
+	printf("%s\n", (char *)(teste->content));
+	free(teste);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/23 01:05:52 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/23 20:44:59 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
+{
+	int	count;
+
+	count = 0;
+	while (lst)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+/*
+int main(void)
+{
+	t_list	*temp;
+	t_list	*head;
+	t_list	*a;
+	t_list	*b;
+
+	a = malloc(sizeof(t_list));
+	b = malloc(sizeof(t_list));
+
+	head = a;
+	a->next = b;
+	b->next = NULL;
+
+	printf ("%d\n", ft_lstsize(head));
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 21:10:44 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/15 21:18:06 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	const unsigned char	*ptr;
+	unsigned char		tc;
+	size_t				i;
+
+	ptr = (const unsigned char *)s;
+	tc = (unsigned char)c;
+	i = 0;
+	while (i < n)
+	{
+		if (ptr[i] == tc)
+			return ((void *)(ptr + i));
+		i++;
+	}
+	return (NULL);
+}
+/*
+int main(void)
+{
+	char string[] = "Looking for character";
+	char look_for = 'z';
+	size_t s = sizeof(string);
+	char *r = ft_memchr(string, look_for, s);
+
+	if (r != NULL)
+		printf("Found '%c' in the %lu position", *r, r - string);
+	else
+		printf("Character '%c' not found in the %lu first bytes\n", look_for, s);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 13:11:08 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:30:53 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	const unsigned char	*ptr1;
+	const unsigned char	*ptr2;
+	size_t				i;
+
+	ptr1 = (const unsigned char *)s1;
+	ptr2 = (const unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (ptr1[i] != ptr2[i])
+			return (ptr1[i] - ptr2[i]);
+		i++;
+	}
+	return (0);
+}
+/*
+#include <stddef.h>
+
+int main(void)
+{
+	char a[] = "abcde";
+	char b[] = "abcff";
+
+	int r1 = ft_memcmp(a, b, 5);
+	int r2 = memcmp(a, b, 5);
+
+	printf ("%d\n", r1);
+	printf ("%d\n", r2);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 00:00:53 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/11 01:57:57 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	if (n == 0)
+		return (dest);
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	s = (const unsigned char *)src;
+	d = (unsigned char *)dest;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dest);
+}
+/*
+int main(void)
+{
+	char	src[] = "Qualquer coisa";
+	char	dst[30];
+	ft_memcpy(dst, src, 7);
+	printf ("Origem: %s\n", src);
+	printf ("Destino: %s\n", dst);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memove.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 15:50:56 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/11 17:46:50 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+	size_t				i;
+
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	i = 0;
+	if (d == s || n == 0)
+		return (dest);
+	if (d < s)
+	{
+		while (i < n)
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (n--)
+		{
+			d[n] = s[n];
+		}
+	}
+	return (dest);
+}
+/*
+int main(void)
+{
+	char str1[100] = "123456789";
+	char str2[100] = "123456789";
+
+	printf ("Antes: %s\n", str1);
+	
+	ft_memmove(str1 + 2, str1, 5);
+	printf ("Depois: %s\n", str1);
+
+	memmove (str2 + 2, str2, 5);
+	printf ("Com memmove original: %s\n", str2);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/10 16:09:08 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:31:40 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	ptr = (unsigned char *)b;
+	i = 0;
+	while (i < len)
+	{
+		ptr[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
+}
+/*
+#include <string.h>
+#include <stdio.h>
+
+int	main(void)
+{
+	char buffer[10] = "abcdefghij";
+	for (int i = 0; i < 10; i++)
+		printf("%c ", buffer[i]);
+	printf ("\n");
+	ft_memset(buffer, 0, sizeof(buffer));
+	for (int i = 0; i < 10; i++)
+		printf("%d ", buffer[i]);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 13:18:04 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/22 14:07:22 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+/*
+int main(void)
+{
+	char	c = 'a';
+	ft_putchar_fd(c, 1);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 14:14:57 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:32:08 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int		i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write (fd, "\n", 1);
+}
+/*
+#include <unistd.h>
+
+int	main(void)
+{
+	char	str[] = "end!";
+	ft_putendl_fd(str, 4);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 15:15:29 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/22 16:07:04 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	nb;
+	char	c;
+
+	nb = n;
+	if (nb < 0)
+	{
+		write (fd, "-", 1);
+		nb = -nb;
+	}
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+	}
+	c = nb % 10 + '0';
+	write (fd, &c, 1);
+}
+/*
+int main(void)
+{
+	int i = -2147483648;
+	ft_putnbr_fd(i, 1);
+	write (1, "\n", 1);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 14:14:57 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:32:33 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+/*
+#include <unistd.h>
+
+int	main(void)
+{
+	char	str[] = "Hello World!!!";
+	ft_putstr_fd(str, 1);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/19 18:21:30 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:44:15 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static int	ft_countwords(const char *s, char c);
+
+static void	ft_free(char **result);
+
+static int	ft_search(const char *s, char c);
+
+char	**ft_split(char const *s, char c)
+{
+	char		**result;
+	int			i;
+	int			w_len;
+
+	if (!s)
+		return (NULL);
+	result = (char **)ft_calloc(ft_countwords(s, c) + 1, sizeof(char *));
+	if (!result)
+		return (NULL);
+	i = 0;
+	while (*s != '\0')
+	{
+		while (*s == c && *s != '\0')
+			s++;
+		if (*s != '\0')
+		{
+			w_len = ft_search(s, c);
+			result[i] = ft_substr(s, 0, w_len);
+			if (!result[i])
+				return (ft_free(result), NULL);
+			i++;
+			s = s + w_len;
+		}
+	}
+	return (result);
+}
+
+/*
+int	main(void)
+{
+	char	**result;
+	int		i;
+
+	char	*str = "Testing word separation in phrases";
+	result = ft_split(str, ' ');
+	i = 0;
+	while (result[i] != NULL)
+	{
+		printf("Result[%d] - %s\n", i, result[i]);
+		i++;
+	}
+	ft_free(result);
+}
+*/
+
+static int	ft_countwords(const char *s, char c)
+{
+	size_t	count;
+	int		i;
+
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c)
+		{
+			count++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
+		else
+			i++;
+	}
+	return (count);
+}
+
+static void	ft_free(char **result)
+{
+	int	i;
+
+	i = 0;
+	while (result[i] != NULL)
+		free(result[i++]);
+	free(result);
+}
+
+static int	ft_search(const char *s, char c)
+{
+	int	w_len;
+
+	w_len = 0;
+	if (*s != '\0')
+	{
+		if (!ft_strchr(s, c))
+			w_len = ft_strlen(s);
+		else
+			w_len = ft_strchr(s, c) - s;
+	}
+	return (w_len);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 18:22:47 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/14 18:48:47 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strchr(const char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char)c)
+			return ((char *)&str[i]);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)&str[i]);
+	return (NULL);
+}
+/*
+int main(void)
+{
+    char string[] = "Testing characters locating";
+    char *found = ft_strchr(string, 'l');
+    printf("Return: %s\n", found);
+    return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 15:58:25 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/17 16:10:52 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (s[i])
+		i++;
+	dup = (char *)malloc(sizeof(char) * i + 1);
+	if (dup == NULL)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		dup[j] = s[j];
+		j++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+/*
+int main(void)
+{
+    char *string = "Let's duplicate this";
+    char *duplicated;
+    duplicated = ft_strdup(string);
+    printf("%s\n", duplicated);
+    free(duplicated);
+    return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 22:53:27 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:34:04 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+}
+/*
+static void	to_lower(unsigned int i, char *s)
+{
+	(void) i;
+	if (*s >= 'A' && *s <= 'Z')
+		*s = *s + 32;
+}
+int main(void)
+{
+	char string[] = "TO_LOWERCASE";
+	ft_striteri(string, to_lower);
+	printf("Final content of the string: %s\n", string);
+	return (0);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 23:29:53 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/18 00:07:32 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	unsigned int	i;
+	unsigned int	j;
+	char			*final;
+
+	final = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!final)
+		return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		final[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		final[i] = s2[j];
+		j++;
+		i++;
+	}
+	final[i] = '\0';
+	return (final);
+}
+/*
+int main(void)
+{
+	char *dest = "ABC";
+	char *src = "DEF";
+	char *result = ft_strjoin(dest, src);
+	printf ("Result: %s\n", result);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/13 17:27:01 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:34:35 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	size_t	ts;
+	size_t	td;
+
+	td = ft_strlen(dst);
+	ts = ft_strlen(src);
+	i = td;
+	j = 0;
+	if (size <= td)
+		return (ts + size);
+	while ((src[j] != '\0') & (i < size -1))
+	{
+		dst[i] = src[j];
+		j++;
+		i++;
+	}
+	dst[i] = '\0';
+	return (ts + td);
+}
+/*
+
+#include <bsd/string.h>
+
+int	main(void)
+{
+	size_t r = 0;
+	char dst[6] = "Hello ";
+	char src[] = "for All!!!";
+	char bkp[100];
+	strcpy (bkp, dst);
+	printf ("Retorno esperado: %zu\n", strlcat (dst, src, sizeof(dst)));
+	strcpy (dst, bkp);
+	r = ft_strlcat(dst, src, sizeof(dst));
+	printf ("Conteudo no dst: %s\n", dst);
+	printf ("Caracteres em dest: %zu\n", ft_strlen(dst));
+	printf ("Total de caracteres: %zu\n", r);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/13 15:32:30 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/13 16:15:36 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size != 0)
+	{
+		while (src[i] != '\0' && i < size -1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
+}
+/*
+int main(void)
+{
+	char dst[10];
+	char src[] = "A wine and Pasta";
+	ft_strlcpy(dst, src, sizeof(dst));
+	printf ("Now, we have the following dest: %s\n", dst);
+	printf ("Size of dest: %zu\n", ft_strlen(dst));
+	printf ("Size of src: %zu\n", ft_strlen(src));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/10 00:50:58 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:06:50 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+/*
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char string[] = "Testing Characters Count!";
+	printf ("Characters Total: %zu\n", ft_strlen(string));
+	printf ("Characters Total Original Function: %zu\n", strlen(string));
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/21 17:13:05 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:36:34 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*result;
+
+	i = 0;
+	if (!s || !f)
+		return (NULL);
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s)) + 1);
+	if (result == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		result[i] = f(i, s[i]);
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}
+/*
+static char	to_upper(unsigned int i, char str);
+
+int main(void)
+{
+	char *str = "to_uppercase";
+	char *result = ft_strmapi(str, to_upper);
+	printf("Final Result: %s\n", result);
+	return (0);
+}
+
+char	to_upper(unsigned int i, char str)
+{
+	if (str >= 'a' && str <= 'z')
+		return (str - 32);
+	else
+		return (str);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 20:21:16 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/26 23:36:48 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+/*
+#include <stddef.h>
+
+int main(void)
+{
+	char string1[] = "Toasting";
+	char string2[] = "Test my program";
+	printf ("%d\n", ft_strncmp(string1, string2, 2));	
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 21:35:39 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/16 08:26:57 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		while (needle[j] && haystack[i + j]
+			&& needle[j] == haystack[i + j] && i + j < len)
+			j++;
+		if (needle[j] == '\0')
+			return ((char *)haystack + i);
+		i++;
+	}
+	return (NULL);
+}
+/*
+int main(void)
+{
+	const char *string = "Searchable Long String";
+	const char *subs = "Lon";
+	char *result = ft_strnstr(string, subs, 15);
+	if (result)
+		printf("Substring found: %s\n", result);
+	else
+		printf("Not found\n");	
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 18:49:47 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/15 18:02:53 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_strrchr(const char *str, int c)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		if ((unsigned char)str[i] == (unsigned char)c)
+			return ((char *)&str[i]);
+		i--;
+	}
+	return (NULL);
+}
+/*
+int main(void)
+{
+	printf ("%s\n", strrchr("Finding Reverse Character", 'R'));
+	char string[] = "Finding Reverse Charactere";
+	char *find = ft_strrchr(string, 'R');
+	printf ("Resultado: %s\n", find);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 02:22:55 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/27 23:35:31 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+static char	*ft_newstring(const char *s1, size_t start, size_t len);
+
+static int	ft_trim(const char *set, char c);
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t		i;
+	size_t		e;	
+
+	i = 0;
+	e = ft_strlen(s1) - 1;
+	if (!s1 || !set)
+		return (NULL);
+	if (ft_strlen(s1) == 0)
+		return (ft_strdup(""));
+	while (ft_trim(set, s1[i]))
+		i++;
+	while (ft_trim(set, s1[e]))
+		e--;
+	return (ft_newstring(s1, i, e - i + 1));
+}
+/*
+int	main(void)
+{
+	char	*string = "abaaSelobaba";
+	printf("Result: %s\n", ft_strtrim(string, "ab"));
+}*/
+
+static int	ft_trim(const char *set, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static char	*ft_newstring(const char *s1, size_t start, size_t len)
+{
+	char	*trim;
+	size_t	i;
+
+	if (len <= 0 || start >= ft_strlen(s1))
+		return (ft_strdup(""));
+	trim = malloc(sizeof(char) * len + 1);
+	if (trim == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		trim[i] = s1[start];
+		i++;
+		start++;
+	}
+	trim[i] = '\0';
+	return (trim);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 18:33:22 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/17 21:28:48 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	s_len;
+	char	*d;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (s_len - start < len)
+		len = s_len - start;
+	d = malloc(sizeof(char) * len + 1);
+	if (!d)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		d[i] = s[start];
+		i++;
+		start++;
+	}
+	d[i] = '\0';
+	return (d);
+}
+/*
+int main(void)
+{
+	char *str = "Hola";
+	unsigned int start = 0;
+	unsigned long long len = 3;
+	char *substr = ft_substr(str, start, len);
+	printf ("Resultado: %s\n", substr);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 12:46:07 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/14 13:01:30 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_tolower(int c)
+{
+	if (c > 64 && c < 91)
+		c = c + 32;
+	return (c);
+}
+/*
+int main(void)
+{
+	char string[] = "TestE#!";
+	for (int i = 0; string[i] != '\0'; i++)
+		string[i] = ft_tolower(string[i]);
+	printf ("Result: %s\n", string);
+}*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 11:49:28 by fshiniti          #+#    #+#             */
+/*   Updated: 2025/04/14 12:42:17 by fshiniti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_toupper(int c)
+{
+	if (c > 96 && c < 123)
+		c = c - 32;
+	return (c);
+}
+/*
+int main(void)
+{
+	char str[] = "aBcDe@";
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		str[i] = ft_toupper(str[i]);
+	}
+	printf ("%s\n", str);
+}*/
