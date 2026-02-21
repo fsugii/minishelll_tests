@@ -81,6 +81,8 @@ void	free_cmds(t_cmd *cmds)
 		}
 		if (tmp->redirs)
 			free_redirs(tmp->redirs);
+		if (tmp->heredoc_fd >= 0)
+			close(tmp->heredoc_fd);
 		free(tmp);
 	}
 }

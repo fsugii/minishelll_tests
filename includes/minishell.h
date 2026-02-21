@@ -81,12 +81,9 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
-	char			**cmd_args;		// Command arguments
 	char			**env_vars;		// Environment variables
-	char			**export_vars;	// Exported variables
-	char			**cmd_history;	// Commands history
 	int				exit_code;		// Exit code
-	t_token			*s_tokens;		//Para limpeza depois do exit
+	t_token			*s_tokens;
 	t_cmd			*s_cmds;
 }	t_shell;
 
@@ -145,13 +142,14 @@ void	shlvl_update(char ***env);
 void	setup_signals(void);
 void	handle_sigint(int sig);
 void	setup_signals_execution(void);
+void	setup_signals_heredoc(void);
 
 /* === EXECUTION === */
 void	executor(t_cmd *cmd, t_shell *shell);
 void	execute_pipe(t_cmd *cmd, t_shell *shell);
 char	*find_path(char *cmd, char **envp);
 void	free_tab(char **tab);
-void	check_open(char *file, int flags, int std_fd);
+int		is_right_assignment(char *str);
 void	execution_error(char *cmd, int code, t_shell *shell);
 void	handle_pipes(t_cmd *cmd, int fd_in, int *fd_pipe);
 int		handle_redirection(t_cmd *cmd);
@@ -172,6 +170,7 @@ int		heredoc_has_quotes(char *delimiter);
 char	*heredoc_remove_quotes(char *delimiter);
 char	*heredoc_gen_temp_filename(void);
 char	*heredoc_read_line(void);
+void	heredoc_eof_warning(char *delimiter);
 
 /* === BUILTINS  === */
 int		is_builtin(char **args);

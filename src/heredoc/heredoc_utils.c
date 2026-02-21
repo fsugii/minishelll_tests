@@ -48,9 +48,17 @@ char	*heredoc_gen_temp_filename(void)
 	char		*filename;
 
 	num = ft_itoa(counter++);
-	filename = ft_strjoin(". heredoc_tmp_", num);
+	filename = ft_strjoin(".heredoc_tmp_", num);
 	free(num);
 	return (filename);
+}
+
+void	heredoc_eof_warning(char *delimiter)
+{
+	ft_putstr_fd("minishell: warning: here-document delimited ", 2);
+	ft_putstr_fd("by end-of-file (wanted '", 2);
+	ft_putstr_fd(delimiter, 2);
+	ft_putstr_fd("')\n", 2);
 }
 
 char	*heredoc_read_line(void)

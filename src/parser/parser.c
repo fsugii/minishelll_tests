@@ -42,7 +42,11 @@ static int	validate_syntax(t_token *tokens)
 	if (!current)
 		return (0);
 	if (current->type == TK_PIPE)
-		return (check_pipe_syntax(current) + !0);
+	{
+		ft_putendl_fd(
+			"minishell: syntax error near unexpected token `|'", 2);
+		return (2);
+	}
 	while (current)
 	{
 		if (current->type == TK_PIPE && check_pipe_syntax(current))

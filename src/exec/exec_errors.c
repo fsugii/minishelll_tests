@@ -34,6 +34,20 @@ static void	print_error_message(char *cmd, char *msg)
 	free(with_nl);
 }
 
+int	is_right_assignment(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || (!ft_isalpha(*str) && *str != '_'))
+		return (0);
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	if (str[i] == '=')
+		return (1);
+	return (0);
+}
+
 /* Gere as mensagens de erro de execução e encerra o processo filho.
  * 1. Se tiver '/' e for diretório -> 126 "Is a directory"
  * 2. Se tiver '/' e não existir -> 127 "No such file or directory"

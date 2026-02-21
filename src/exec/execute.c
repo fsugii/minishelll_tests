@@ -32,21 +32,6 @@ static void	exec_single_builtin(t_cmd *cmd, t_shell *shell)
 	close(tmp_stdout);
 }
 
-/*Check if the cmnd is a direct attribution (ex: export=a) */
-static int	is_right_assignment(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str || (!ft_isalpha(*str) && *str != '_'))
-		return (0);
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-		i++;
-	if (str[i] == '=')
-		return (1);
-	return (0);
-}
-
 /*Wait untill all the child process end.
  * The exit_code final always will be the last status from the last cmd*/
 static void	wait_children(pid_t last_pid, t_shell *shell)
@@ -72,32 +57,39 @@ static void	wait_children(pid_t last_pid, t_shell *shell)
 		;
 }
 
-/*Main loop for pipelines. Create pipes and forks for each cmd in the list
- *Update the exit code based on the last command's termination status */
-void	execute_pipe(t_cmd *cmd, t_shell *shell)
+static void	pipe_loop(t_cmd *cmd, int *fd_in, pid_t *pid, t_shell *sh)
 {
-	int		fd_pipe[2];
-	int		fd_in;
-	pid_t	pid;
+	int	fd_pipe[2];
 
-	fd_in = -1;
-	setup_signals_execution();
 	while (cmd)
 	{
 		if (cmd->next && pipe(fd_pipe) == -1)
-			return ;
-		pid = fork();
-		if (pid == 0)
-			child_process(cmd, fd_in, fd_pipe, shell);
-		if (fd_in != -1)
-			close(fd_in);
+			break ;
+		*pid = fork();
+		if (*pid == 0)
+			child_process(cmd, *fd_in, fd_pipe, sh);
+		if (*fd_in != -1)
+			close(*fd_in);
 		if (cmd->next)
 		{
 			close(fd_pipe[1]);
-			fd_in = fd_pipe[0];
+			*fd_in = fd_pipe[0];
 		}
 		cmd = cmd->next;
 	}
+}
+
+void	execute_pipe(t_cmd *cmd, t_shell *shell)
+{
+	int		fd_in;
+	pid_t	pid;
+
+	pid = -1;
+	fd_in = -1;
+	setup_signals_execution();
+	pipe_loop(cmd, &fd_in, &pid, shell);
+	if (fd_in != -1)
+		close(fd_in);
 	wait_children(pid, shell);
 	setup_signals();
 }
