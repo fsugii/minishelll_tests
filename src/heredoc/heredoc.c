@@ -112,7 +112,12 @@ void	process_heredocs(t_cmd *cmds, char **env, int last_exit)
 		while (redir)
 		{
 			if (redir->type == REDIR_HEREDOC)
-				cmd->heredoc_fd = handle_heredoc(redir->target, env, last_exit);
+			{
+				if (cmd->heredoc_fd >= 0)
+					close(cmd->heredoc_fd);
+				cmd->heredoc_fd = handle_heredoc(redir->target,
+						env, last_exit);
+			}
 			redir = redir->next;
 		}
 		cmd = cmd->next;

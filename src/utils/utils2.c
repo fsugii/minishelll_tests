@@ -55,8 +55,6 @@ int	ft_atoll_overflow(const char *str, long long *res)
 			return (1);
 		nmbr = nmbr * 10 + (str[i++] - '0');
 	}
-	while (ft_isspace(str[i]))
-		i++;
 	*res = nmbr * sign;
 	return (str[i] != '\0');
 }

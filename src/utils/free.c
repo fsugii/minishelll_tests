@@ -87,9 +87,15 @@ void	free_cmds(t_cmd *cmds)
 	}
 }
 
-/*Clean all memory from parent process and exit the child process*/
 void	cleanup_exit_child(t_shell *shell, int exit_code)
 {
-	free_all(shell);
+	if (!shell)
+		exit(exit_code);
+	if (shell->s_tokens)
+		free_tokens(shell->s_tokens);
+	if (shell->s_cmds)
+		free_cmds(shell->s_cmds);
+	if (shell->env_vars)
+		free_env(shell->env_vars);
 	exit(exit_code);
 }
