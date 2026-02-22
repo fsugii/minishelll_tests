@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minishell — Relatório de Bugs & Testes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;700;800&display=swap');
+
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111318;
+    --surface2: #181c22;
+    --border: #1e2430;
+    --text: #c8d0dc;
+    --muted: #4a5568;
+    --accent: #4ade80;
+    --red: #f87171;
+    --orange: #fb923c;
+    --yellow: #fbbf24;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --cyan: #22d3ee;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .scanline {
+    position: fixed; inset: 0; pointer-events: none; z-index: 100;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 40px 60px 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--accent); }
+
+  .meta {
+    text-align: right;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .meta strong { color: var(--text); display: block; font-size: 13px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 60px; }
+
+  /* Summary bar */
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  }
+  .stat.critical::before { background: var(--red); }
+  .stat.high::before { background: var(--orange); }
+  .stat.medium::before { background: var(--yellow); }
+  .stat.info::before { background: var(--blue); }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat.critical .stat-num { color: var(--red); }
+  .stat.high .stat-num { color: var(--orange); }
+  .stat.medium .stat-num { color: var(--yellow); }
+  .stat.info .stat-num { color: var(--blue); }
+  .stat-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Section */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Bug cards */
+  .bug-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+
+  .bug {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .bug:hover { border-color: var(--muted); }
+
+  .bug-header {
+    display: grid;
+    grid-template-columns: 36px 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+  }
+
+  .bug-id {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .bug-title {
+    font-weight: 600;
+    color: #e2e8f0;
+    font-size: 13px;
+  }
+
+  .bug-file {
+    font-size: 11px;
+    color: var(--cyan);
+    opacity: 0.7;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .badge.critical { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+  .badge.high { background: rgba(251,146,60,0.15); color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+  .badge.medium { background: rgba(251,191,36,0.15); color: var(--yellow); border: 1px solid rgba(251,191,36,0.3); }
+  .badge.info { background: rgba(96,165,250,0.15); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
+
+  .bug-body {
+    padding: 0 20px 20px 72px;
+    display: none;
+  }
+  .bug.open .bug-body { display: block; }
+  .bug.open .bug-header { border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+
+  .bug-desc {
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    font-size: 12.5px;
+  }
+
+  .code-block {
+    background: #0d0f12;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    margin: 12px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+  .code-block .file-tag {
+    position: absolute; top: 8px; right: 12px;
+    font-size: 10px; color: var(--muted);
+  }
+  pre { color: #94a3b8; white-space: pre; font-size: 12px; }
+  .hl-bad { color: var(--red); background: rgba(248,113,113,0.08); display: block; margin: 0 -16px; padding: 0 16px; }
+  .hl-good { color: var(--accent); background: rgba(74,222,128,0.06); display: block; margin: 0 -16px; padding: 0 16px; }
+  .hl-neutral { color: var(--purple); }
+  .hl-comment { color: #374151; }
+
+  .fix-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  /* Test table */
+  .test-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+  }
+  .test-table th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .test-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 12px;
+  }
+  .test-table tr:last-child td { border-bottom: none; }
+  .test-table tr:hover td { background: var(--surface2); }
+
+  .cmd {
+    background: #0d0f12;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 3px 8px;
+    color: var(--cyan);
+    font-size: 11px;
+    display: inline-block;
+    margin: 2px 0;
+  }
+
+  .expected {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .expected strong { color: var(--text); }
+
+  .risk-dot {
+    width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px;
+  }
+  .risk-dot.critical { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .risk-dot.high { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
+  .risk-dot.medium { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+  .risk-dot.low { background: var(--blue); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 60px;
+    color: var(--muted);
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+
+<header>
+  <div>
+    <div class="logo">mini<span>shell</span> — bug report</div>
+    <div style="color:var(--muted);font-size:11px;margin-top:6px;">Refactoredv3 · análise estática de código</div>
+  </div>
+  <div class="meta">
+    <strong>2026-02-21</strong>
+    fshiniti / abroslav · 42 Porto
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="summary">
+    <div class="stat critical">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Critical</div>
+    </div>
+    <div class="stat high">
+      <div class="stat-num">3</div>
+      <div class="stat-label">High</div>
+    </div>
+    <div class="stat medium">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Medium</div>
+    </div>
+    <div class="stat info">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Info</div>
+    </div>
+  </div>
+
+  <!-- BUGS -->
+  <div class="section-title">Bugs Encontrados</div>
+  <div class="bug-grid">
+
+    <!-- BUG 01 -->
+    <div class="bug open">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-01</div>
+        <div>
+          <div class="bug-title">pid não inicializado em execute_pipe</div>
+          <div class="bug-file">src/exec/execute.c</div>
+        </div>
+        <div></div>
+        <div class="badge critical">critical</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          <code>pid_t pid</code> é declarado sem valor inicial. Se o loop <code>while (cmd)</code> não entrar (cmd == NULL, 
+          embora improvável aqui), <code>wait_children(pid, shell)</code> recebe lixo de memória. 
+          Mais crítico: se <code>pipe()</code> falhar no meio do pipeline, o loop faz <code>return</code> 
+          mas os fds já abertos e os filhos já criados ficam sem ser esperados — processo zombie garantido.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">execute.c</span>
+          <pre><span class="hl-bad">  pid_t   pid;   <span class="hl-comment">// ← lixo de memória</span></span>
+  fd_in = -1;
+  while (cmd)
+  {
+<span class="hl-bad">    if (cmd->next && pipe(fd_pipe) == -1)
+      return ;   <span class="hl-comment">// ← fds e filhos anteriores abandonados</span></span>
+    pid = fork();
+    ...</pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">  pid_t   pid = -1;   <span class="hl-comment">// inicializar</span></span>
+    if (cmd->next && pipe(fd_pipe) == -1)
+    {
+<span class="hl-good">      wait_children(pid, shell);   <span class="hl-comment">// esperar os que já existem</span>
+      return ;
+</span>    }</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 02 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-02</div>
+        <div>
+          <div class="bug-title">heredoc_fd não é fechado em free_cmds</div>
+          <div class="bug-file">src/utils/free.c + src/exec/redirs.c</div>
+        </div>
+        <div></div>
+        <div class="badge critical">critical</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          Quando um comando tem <code>&lt;&lt; EOF</code> mas a execução falha (erro de redireção anterior, 
+          ou builtin que não usa stdin), o <code>cmd->heredoc_fd</code> fica aberto. 
+          <code>free_cmds()</code> liberta a memória mas nunca faz <code>close(heredoc_fd)</code>. 
+          Em pipelines longos com múltiplos heredocs isto acumula fds — o sistema tem limite de 1024.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">free.c — free_cmds()</span>
+          <pre>  while (cmds)
+  {
+    tmp = cmds;
+    cmds = cmds->next;
+    if (tmp->args) { ... }
+    if (tmp->redirs) free_redirs(tmp->redirs);
+<span class="hl-bad">    <span class="hl-comment">// heredoc_fd nunca é fechado aqui</span></span>
+    free(tmp);
+  }</pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">    if (tmp->heredoc_fd >= 0)
+      close(tmp->heredoc_fd);</span>
+    free(tmp);</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 03 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-03</div>
+        <div>
+          <div class="bug-title">SIGINT durante heredoc não é tratado</div>
+          <div class="bug-file">src/heredoc/heredoc.c</div>
+        </div>
+        <div></div>
+        <div class="badge critical">critical</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          Durante a leitura de um heredoc interativo (<code>readline("&gt; ")</code>), 
+          se o utilizador carregar Ctrl+C, o <code>handle_sigint</code> do modo interativo 
+          é invocado — que chama <code>rl_redisplay()</code> e regista o sinal — 
+          mas <code>readline</code> devolve NULL. O heredoc pensa que chegou ao EOF, 
+          escreve o aviso "delimited by end-of-file" e continua. 
+          O ficheiro temporário fica no disco e o exit_code não fica 130.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">heredoc.c</span>
+          <pre>  while (1)
+  {
+    line = readline("> ");
+<span class="hl-bad">    if (!line)   <span class="hl-comment">// Ctrl+C e EOF tratados igual</span></span>
+    {
+      ft_putstr_fd("minishell: warning: ...", 2);
+      break;
+    }</pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre>    if (!line)
+    {
+<span class="hl-good">      if (g_last_signal == SIGINT)
+      {
+        close(ctx->fd);
+        unlink(temp_file);
+        return (-1);   <span class="hl-comment">// abortar heredoc</span>
+      }</span>
+      ft_putstr_fd("minishell: warning: ...", 2);
+      break;
+    }</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 04 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-04</div>
+        <div>
+          <div class="bug-title">Nome do ficheiro temporário do heredoc com espaço</div>
+          <div class="bug-file">src/heredoc/heredoc_utils.c</div>
+        </div>
+        <div></div>
+        <div class="badge high">high</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          <code>heredoc_gen_temp_filename()</code> gera <code>". heredoc_tmp_0"</code> — 
+          com um ponto, um espaço, e depois o nome. O espaço no nome do ficheiro 
+          não causa crash porque é usado diretamente com <code>open()</code>, 
+          mas se algum código externo ou debug tentar usar o nome em shell, parte. 
+          Mais grave: o <code>counter</code> é <code>static</code>, logo se o processo fizer 
+          vários heredocs e reiniciar (ex: testes automáticos), os nomes colidem entre runs.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">heredoc_utils.c</span>
+          <pre><span class="hl-bad">  filename = ft_strjoin(". heredoc_tmp_", num);
+  <span class="hl-comment">// resultado: ". heredoc_tmp_0" ← espaço aqui</span></span></pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">  filename = ft_strjoin("/tmp/.minishell_hd_", num);
+  <span class="hl-comment">// usa /tmp para não poluir o cwd</span></span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 05 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-05</div>
+        <div>
+          <div class="bug-title">check_open declarado mas não definido</div>
+          <div class="bug-file">includes/minishell.h</div>
+        </div>
+        <div></div>
+        <div class="badge high">high</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          O header <code>minishell.h</code> declara <code>void check_open(char *file, int flags, int std_fd)</code>, 
+          mas nenhum ficheiro <code>.c</code> fornecido define esta função. 
+          O código em <code>redirs.c</code> não a usa — foi substituída por <code>apply_redir()</code> — 
+          mas a declaração fantasma no header cria confusão e pode causar erro de linker 
+          se alguém tentar chamá-la.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">minishell.h</span>
+          <pre><span class="hl-bad">void    check_open(char *file, int flags, int std_fd);
+<span class="hl-comment">// ↑ declarada mas nunca definida em nenhum .c</span></span></pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good"><span class="hl-comment">// Remover a declaração do header</span></span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 06 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-06</div>
+        <div>
+          <div class="bug-title">validate_syntax — pipe no início retorna valor errado</div>
+          <div class="bug-file">src/parser/parser.c</div>
+        </div>
+        <div></div>
+        <div class="badge high">high</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          Quando o primeiro token é <code>TK_PIPE</code>, o código faz 
+          <code>return (check_pipe_syntax(current) + !0)</code>. 
+          <code>!0</code> é sempre <code>1</code>. Se <code>check_pipe_syntax</code> 
+          devolver <code>2</code>, o resultado é <code>3</code>. 
+          O código em <code>parser()</code> testa <code>!= 0</code>, por isso não crash — 
+          mas é claramente um bug de lógica/typo que pode mascarar o exit_code correto.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">parser.c</span>
+          <pre>  if (current->type == TK_PIPE)
+<span class="hl-bad">    return (check_pipe_syntax(current) + !0);
+    <span class="hl-comment">// !0 == 1, então 2+1 = 3 em vez de 2</span></span></pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">    return (check_pipe_syntax(current));</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 07 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-07</div>
+        <div>
+          <div class="bug-title">export_vars em t_shell nunca é inicializado</div>
+          <div class="bug-file">src/main.c — init_shell()</div>
+        </div>
+        <div></div>
+        <div class="badge medium">medium</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          O struct <code>t_shell</code> tem o campo <code>char **export_vars</code>, 
+          mas <code>init_shell()</code> nunca o inicializa a <code>NULL</code>. 
+          Fica com lixo de stack. Se algum código futuro (ou teste) tentar 
+          iterar <code>shell->export_vars</code>, o comportamento é indefinido.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">main.c — init_shell()</span>
+          <pre>  shell->env_vars = copy_env(envp);
+  shell->exit_code = 0;
+  shell->s_tokens = NULL;
+  shell->s_cmds = NULL;
+<span class="hl-bad">  <span class="hl-comment">// export_vars e cmd_args e cmd_history nunca inicializados</span></span></pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">  shell->export_vars = NULL;
+  shell->cmd_args = NULL;
+  shell->cmd_history = NULL;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 08 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-08</div>
+        <div>
+          <div class="bug-title">ft_atoll_overflow aceita strings com trailing não-numérico</div>
+          <div class="bug-file">src/utils/utils2.c</div>
+        </div>
+        <div></div>
+        <div class="badge medium">medium</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          A função retorna erro se <code>str[i] != '\0'</code> após o número 
+          — mas o loop de whitespace antes do check (<code>while ft_isspace</code>) 
+          consome espaços finais. Logo <code>"42abc"</code> retorna erro corretamente, 
+          mas <code>"42 "</code> retorna sucesso (res=42). 
+          bash trata <code>exit "42 "</code> como erro numérico — o minishell não.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">utils2.c</span>
+          <pre>  while (ft_isspace(str[i]))   <span class="hl-comment">// consome trailing spaces</span>
+    i++;
+<span class="hl-bad">  *res = nmbr * sign;
+  return (str[i] != '\0');   <span class="hl-comment">// "42 " passa! bash rejeita</span></span></pre>
+        </div>
+        <div class="fix-label">→ Fix</div>
+        <div class="code-block">
+          <pre><span class="hl-good">  <span class="hl-comment">// Não consumir trailing spaces — bash rejeita "42 "</span>
+  return (str[i] != '\0');</span>   <span class="hl-comment">// sem o while de spaces antes</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 09 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-09</div>
+        <div>
+          <div class="bug-title">heredoc_read_line buffer fixo pode truncar linhas</div>
+          <div class="bug-file">src/heredoc/heredoc_utils.c</div>
+        </div>
+        <div></div>
+        <div class="badge medium">medium</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          <code>heredoc_read_line()</code> usa um buffer fixo de 1024 bytes. 
+          Uma linha de heredoc com mais de 1023 caracteres é silenciosamente truncada. 
+          O resto da linha continua no stdin e é lido como a próxima linha — 
+          podendo coincidir acidentalmente com o delimiter e terminar o heredoc cedo.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">heredoc_utils.c</span>
+          <pre><span class="hl-bad">  char    buffer[1024];   <span class="hl-comment">// limite fixo</span></span>
+  i = 0;
+  while (i < 1023)   { ... }
+  buffer[i] = '\0';
+<span class="hl-bad">  return (ft_strdup(buffer));   <span class="hl-comment">// resto da linha fica no stdin</span></span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 10 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-10</div>
+        <div>
+          <div class="bug-title">wait_children só espera o último pid com waitpid</div>
+          <div class="bug-file">src/exec/execute.c</div>
+        </div>
+        <div></div>
+        <div class="badge info">info</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          <code>waitpid(last_pid, &status, 0)</code> espera apenas o último processo e 
+          captura o seu exit status. O loop <code>while (waitpid(-1, NULL, 0) > 0)</code> 
+          recolhe os outros, mas os seus exit codes são descartados. 
+          Isto é correto para bash-compliance (o exit code do pipeline é o do último comando), 
+          mas se o último fork() falhar, <code>pid</code> pode ficar com valor do fork anterior.
+          Comportamento de <code>ls broken | echo hi</code>: exit code deve ser 0 (echo), e está correto.
+          Apenas documenta comportamento esperado.
+        </div>
+        <div class="code-block">
+          <span class="file-tag">execute.c</span>
+          <pre>  <span class="hl-comment">// Correto por spec — mas confirmar que pid é do último fork</span>
+  wait_children(pid, shell);   
+  <span class="hl-comment">// se o último fork() retornou -1, pid == -1 e waitpid não espera nada</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUG 11 -->
+    <div class="bug">
+      <div class="bug-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="bug-id">B-11</div>
+        <div>
+          <div class="bug-title">cmd_history e cmd_args em t_shell não utilizados</div>
+          <div class="bug-file">includes/minishell.h</div>
+        </div>
+        <div></div>
+        <div class="badge info">info</div>
+      </div>
+      <div class="bug-body">
+        <div class="bug-desc">
+          <code>t_shell</code> define <code>cmd_history</code> e <code>cmd_args</code> 
+          que nunca são preenchidos nem libertados. Se o avaliador inspecionar a struct 
+          ou se o ASAN reportar leituras de memória não-inicializada, pode ser problema.
+          Remover os campos não usados ou inicializá-los limpa o código.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TESTES -->
+  <div class="section-title">Testes que Podem Quebrar</div>
+
+  <table class="test-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Comando a testar</th>
+        <th>Comportamento esperado (bash)</th>
+        <th>Risco</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td style="color:var(--muted)">T-01</td>
+        <td><span class="cmd">| echo hi</span></td>
+        <td><span class="expected">Erro de sintaxe, exit <strong>2</strong></span></td>
+        <td><span class="risk-dot high"></span>B-06: retorna 3 em vez de 2</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-02</td>
+        <td><span class="cmd">cat &lt;&lt; EOF</span> <em>(Ctrl+C durante input)</em></td>
+        <td><span class="expected">Cancela heredoc, exit <strong>130</strong>, nova prompt</span></td>
+        <td><span class="risk-dot critical"></span>B-03: EOF é tratado como fim normal</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-03</td>
+        <td><span class="cmd">cat &lt;&lt; A | cat &lt;&lt; B | cat &lt;&lt; C</span></td>
+        <td><span class="expected">3 heredocs funcionam em sequência</span></td>
+        <td><span class="risk-dot high"></span>B-01: se pipe() falhar, fds/pids abandonados</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-04</td>
+        <td><span class="cmd">cat &lt;&lt; EOF</span> <em>(linha com 1025 chars)</em></td>
+        <td><span class="expected">Linha completa passada ao comando</span></td>
+        <td><span class="risk-dot high"></span>B-09: buffer truncado em 1023</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-05</td>
+        <td><span class="cmd">exit "42 "</span></td>
+        <td><span class="expected">Erro: "numeric argument required", exit <strong>2</strong></span></td>
+        <td><span class="risk-dot high"></span>B-08: aceita "42 " como válido</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-06</td>
+        <td><span class="cmd">cat &lt;&lt; EOF &gt; /dev/null</span> <em>(50x em loop)</em></td>
+        <td><span class="expected">Sem leak de fds</span></td>
+        <td><span class="risk-dot critical"></span>B-02: heredoc_fd nunca fechado</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-07</td>
+        <td><span class="cmd">echo $?</span> <em>após <code>| echo</code></em></td>
+        <td><span class="expected">exit <strong>2</strong></span></td>
+        <td><span class="risk-dot high"></span>B-06: exit code é 3</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-08</td>
+        <td><span class="cmd">ls /nope &gt; /nope2 | cat</span></td>
+        <td><span class="expected">Exit <strong>0</strong> (cat é o último)</span></td>
+        <td><span class="risk-dot medium"></span>B-01: se pipe falha, pid indefinido</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-09</td>
+        <td><span class="cmd">export MYVAR=hello; echo $MYVAR</span></td>
+        <td><span class="expected"><strong>hello</strong></span></td>
+        <td><span class="risk-dot medium"></span>B-07: export_vars não inicializado pode corromper</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-10</td>
+        <td><span class="cmd">cat &lt;&lt; "EOF"</span> <em>(delimiter com aspas)</em></td>
+        <td><span class="expected">Sem expansão de variáveis no corpo</span></td>
+        <td><span class="risk-dot medium"></span>Verificar heredoc_remove_quotes com aspas no meio</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-11</td>
+        <td><span class="cmd">echo "unclosed</span> <em>(aspas sem fechar)</em></td>
+        <td><span class="expected">Erro sintaxe, exit <strong>2</strong>, prompt nova</span></td>
+        <td><span class="risk-dot medium"></span>validate_line deve detectar — testar exit code</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-12</td>
+        <td><span class="cmd">./minishell &lt; script.sh</span> <em>(modo não-tty)</em></td>
+        <td><span class="expected">Executa todos os comandos, sem "minishell&gt; " na saída</span></td>
+        <td><span class="risk-dot medium"></span>Regressão de não-tty — B-09 ampliado</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-13</td>
+        <td><span class="cmd">echo $((2+2))</span></td>
+        <td><span class="expected">bash: <strong>4</strong> / minishell: sem aritmética implementada</span></td>
+        <td><span class="risk-dot medium"></span>Expande <code>$((2+2))</code> como <code>$(</code> → lixo</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-14</td>
+        <td><span class="cmd">cd ""</span></td>
+        <td><span class="expected">Sem erro (bash ignora string vazia)</span></td>
+        <td><span class="risk-dot medium"></span>Verificado em builtin_cd.c — tem check, mas testar</td>
+      </tr>
+
+      <tr>
+        <td style="color:var(--muted)">T-15</td>
+        <td>
+          <span class="cmd">valgrind ./minishell</span> + executar 20 cmds + exit
+        </td>
+        <td><span class="expected">0 leaks diretos</span></td>
+        <td><span class="risk-dot critical"></span>B-02 + B-07: leaks garantidos no valgrind</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div class="section-title">Resumo por Ficheiro</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px 20px;">
+      <div style="color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Alta prioridade</div>
+      <div style="color:var(--red);margin:4px 0;">exec/execute.c</div>
+      <div style="color:var(--red);margin:4px 0;">heredoc/heredoc.c</div>
+      <div style="color:var(--orange);margin:4px 0;">utils/free.c</div>
+      <div style="color:var(--orange);margin:4px 0;">heredoc/heredoc_utils.c</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px 20px;">
+      <div style="color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Média prioridade</div>
+      <div style="color:var(--yellow);margin:4px 0;">parser/parser.c</div>
+      <div style="color:var(--yellow);margin:4px 0;">main.c (init_shell)</div>
+      <div style="color:var(--yellow);margin:4px 0;">utils/utils2.c</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px 20px;">
+      <div style="color:var(--muted);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Limpeza</div>
+      <div style="color:var(--blue);margin:4px 0;">includes/minishell.h</div>
+      <div style="color:var(--blue);margin:4px 0;">exec/execute.c (pid init)</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>minishell · Refactoredv3 · 42 Porto</div>
+  <div>11 bugs · 15 testes identificados · gerado 2026-02-21</div>
+</footer>
+
+<script>
+  // Fechar todos excepto o primeiro ao carregar
+  document.querySelectorAll('.bug:not(:first-child)').forEach(b => b.classList.remove('open'));
+</script>
+</body>
+</html>

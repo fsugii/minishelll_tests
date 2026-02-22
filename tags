@@ -1,0 +1,363 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/fshiniti/Desktop/minishell_tests/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+$(BONUS_FLAG)	libft/Makefile	/^$(BONUS_FLAG): $(NAME) $(BONUS_OBJS)$/;"	t
+$(LIBFT)	Makefile	/^$(LIBFT):$/;"	t
+$(NAME)	Makefile	/^$(NAME): $(OBJS) $(LIBFT)$/;"	t
+$(NAME)	libft/Makefile	/^$(NAME): $(OBJS)$/;"	t
+%.o	Makefile	/^%.o: %.c$/;"	t
+%.o	libft/Makefile	/^%.o: %.c$/;"	t
+1. Modularization	CHANGES.md	/^### 1. Modularization$/;"	S	section:Minishell: Original vs Refactoredv3""Architectural Summary
+1. lexer/lexer.c	CHANGES.md	/^### 1. lexer\/lexer.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+2. Non-TTY Support	CHANGES.md	/^### 2. Non-TTY Support$/;"	S	section:Minishell: Original vs Refactoredv3""Architectural Summary
+2. parser/parser.c	CHANGES.md	/^### 2. parser\/parser.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+3. Sanitizers	CHANGES.md	/^### 3. Sanitizers$/;"	S	section:Minishell: Original vs Refactoredv3""Architectural Summary
+3. heredoc/heredoc.c	CHANGES.md	/^### 3. heredoc\/heredoc.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+4. Heredocs	CHANGES.md	/^### 4. Heredocs$/;"	S	section:Minishell: Original vs Refactoredv3""Architectural Summary
+4. exec/execute.c	CHANGES.md	/^### 4. exec\/execute.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+5. Input Validation	CHANGES.md	/^### 5. Input Validation$/;"	S	section:Minishell: Original vs Refactoredv3""Architectural Summary
+5. exec/child.c	CHANGES.md	/^### 5. exec\/child.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+6. main.c	CHANGES.md	/^### 6. main.c$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+7. minishell.h (Header)	CHANGES.md	/^### 7. minishell.h (Header)$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+8. Makefile	CHANGES.md	/^### 8. Makefile$/;"	S	section:Minishell: Original vs Refactoredv3""Modified Files
+Architectural Summary	CHANGES.md	/^## Architectural Summary$/;"	s	chapter:Minishell: Original vs Refactoredv3
+BLUE	Makefile	/^BLUE    = \\033[0;34m$/;"	m
+BONUS_FLAG	libft/Makefile	/^BONUS_FLAG= .bonus_added$/;"	m
+BONUS_OBJS	libft/Makefile	/^BONUS_OBJS= $(BONUS_SRCS:.c=.o)$/;"	m
+BONUS_SRCS	libft/Makefile	/^BONUS_SRCS= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_l/;"	m
+Builtin Examples	IMPLEMENTATION_GUIDE.md	/^### Builtin Examples$/;"	S	section:Minishell - Complete Implementation Guide""Builtins
+Builtins	IMPLEMENTATION_GUIDE.md	/^## Builtins$/;"	s	chapter:Minishell - Complete Implementation Guide
+CC	Makefile	/^CC = cc$/;"	m
+CC	libft/Makefile	/^CC= cc -Wall -Wextra -Werror$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined$/;"	m
+CYAN	Makefile	/^CYAN    = \\033[0;36m$/;"	m
+Compilation	CHANGES.md	/^## Compilation$/;"	s	chapter:Minishell: Original vs Refactoredv3
+Data Structures	IMPLEMENTATION_GUIDE.md	/^## Data Structures$/;"	s	chapter:Minishell - Complete Implementation Guide
+Environment Variables	IMPLEMENTATION_GUIDE.md	/^## Environment Variables$/;"	s	chapter:Minishell - Complete Implementation Guide
+Example	IMPLEMENTATION_GUIDE.md	/^### Example$/;"	S	section:Minishell - Complete Implementation Guide""Expander (Variable Expansion)
+Example	IMPLEMENTATION_GUIDE.md	/^### Example$/;"	S	section:Minishell - Complete Implementation Guide""Lexer (Tokenization)
+Example	IMPLEMENTATION_GUIDE.md	/^### Example$/;"	S	section:Minishell - Complete Implementation Guide""Parser
+Executor	IMPLEMENTATION_GUIDE.md	/^## Executor$/;"	s	chapter:Minishell - Complete Implementation Guide
+Expander (Variable Expansion)	IMPLEMENTATION_GUIDE.md	/^## Expander (Variable Expansion)$/;"	s	chapter:Minishell - Complete Implementation Guide
+GREEN	Makefile	/^GREEN   = \\033[0;32m$/;"	m
+Heredoc	IMPLEMENTATION_GUIDE.md	/^## Heredoc$/;"	s	chapter:Minishell - Complete Implementation Guide
+How it works	IMPLEMENTATION_GUIDE.md	/^### How it works$/;"	S	section:Minishell - Complete Implementation Guide""Heredoc
+INCLUDES	Makefile	/^INCLUDES = -I$(INCLUDES_DIR) -I$(LIBFT_DIR)$/;"	m
+INCLUDES_DIR	Makefile	/^INCLUDES_DIR = includes$/;"	m
+Introduction	IMPLEMENTATION_GUIDE.md	/^## Introduction$/;"	s	chapter:Minishell - Complete Implementation Guide
+Key Differences in Execution Flow	CHANGES.md	/^## Key Differences in Execution Flow$/;"	s	chapter:Minishell: Original vs Refactoredv3
+LDFLAGS	Makefile	/^LDFLAGS = -lreadline -fsanitize=address,undefined$/;"	m
+LIBFT	Makefile	/^LIBFT = $(LIBFT_DIR)\/libft.a$/;"	m
+LIBFT_DIR	Makefile	/^LIBFT_DIR = libft$/;"	m
+LIBFT_H	libft/libft.h	/^# define LIBFT_H$/;"	d
+Lexer (Tokenization)	IMPLEMENTATION_GUIDE.md	/^## Lexer (Tokenization)$/;"	s	chapter:Minishell - Complete Implementation Guide
+MINISHELL_H	includes/minishell.h	/^# define MINISHELL_H$/;"	d
+Main Loop	IMPLEMENTATION_GUIDE.md	/^## Main Loop$/;"	s	chapter:Minishell - Complete Implementation Guide
+Memory Management	IMPLEMENTATION_GUIDE.md	/^## Memory Management$/;"	s	chapter:Minishell - Complete Implementation Guide
+Minishell - Complete Implementation Guide	IMPLEMENTATION_GUIDE.md	/^# Minishell - Complete Implementation Guide$/;"	c
+Minishell: Original vs Refactoredv3	CHANGES.md	/^# Minishell: Original vs Refactoredv3$/;"	c
+Modified Files	CHANGES.md	/^## Modified Files$/;"	s	chapter:Minishell: Original vs Refactoredv3
+NAME	Makefile	/^NAME = minishell$/;"	m
+NAME	libft/Makefile	/^NAME= libft.a$/;"	m
+NC	Makefile	/^NC      = \\033[0m # No Color$/;"	m
+New Files (only in Refactoredv3)	CHANGES.md	/^## New Files (only in Refactoredv3)$/;"	s	chapter:Minishell: Original vs Refactoredv3
+OBJS	Makefile	/^OBJS = $(SRCS:.c=.o)$/;"	m
+OBJS	libft/Makefile	/^OBJS= $(SRCS:.c=.o)$/;"	m
+Original	CHANGES.md	/^### Original$/;"	S	section:Minishell: Original vs Refactoredv3""Compilation
+Original	CHANGES.md	/^### Original$/;"	S	section:Minishell: Original vs Refactoredv3""Key Differences in Execution Flow
+Overview	CHANGES.md	/^## Overview$/;"	s	chapter:Minishell: Original vs Refactoredv3
+PATH_MAX	includes/minishell.h	/^#  define PATH_MAX /;"	d
+PURPLE	Makefile	/^PURPLE  = \\033[0;35m$/;"	m
+Parser	IMPLEMENTATION_GUIDE.md	/^## Parser$/;"	s	chapter:Minishell - Complete Implementation Guide
+RED	Makefile	/^RED     = \\033[0;31m$/;"	m
+REDIR_APPEND	includes/minishell.h	/^	REDIR_APPEND,				\/\/ >>$/;"	e	enum:e_redir_type
+REDIR_HEREDOC	includes/minishell.h	/^	REDIR_HEREDOC,				\/\/ <<$/;"	e	enum:e_redir_type
+REDIR_IN	includes/minishell.h	/^	REDIR_IN,					\/\/ <$/;"	e	enum:e_redir_type
+REDIR_OUT	includes/minishell.h	/^	REDIR_OUT,					\/\/ >$/;"	e	enum:e_redir_type
+Refactoredv3	CHANGES.md	/^### Refactoredv3$/;"	S	section:Minishell: Original vs Refactoredv3""Compilation
+Refactoredv3	CHANGES.md	/^### Refactoredv3$/;"	S	section:Minishell: Original vs Refactoredv3""Key Differences in Execution Flow
+SRCS	Makefile	/^SRCS    = $(SRC_DIR)\/main.c \\$/;"	m
+SRCS	libft/Makefile	/^SRCS= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c f/;"	m
+SRC_DIR	Makefile	/^SRC_DIR = src$/;"	m
+Signal Types	IMPLEMENTATION_GUIDE.md	/^### Signal Types$/;"	S	section:Minishell - Complete Implementation Guide""Signals
+Signals	IMPLEMENTATION_GUIDE.md	/^## Signals$/;"	s	chapter:Minishell - Complete Implementation Guide
+Summary	IMPLEMENTATION_GUIDE.md	/^## Summary$/;"	s	chapter:Minishell - Complete Implementation Guide
+TK_APPEND	includes/minishell.h	/^	TK_APPEND,					\/\/ >>$/;"	e	enum:e_token_type
+TK_HEREDOC	includes/minishell.h	/^	TK_HEREDOC,					\/\/ <<$/;"	e	enum:e_token_type
+TK_PIPE	includes/minishell.h	/^	TK_PIPE,					\/\/ |$/;"	e	enum:e_token_type
+TK_REDIR_IN	includes/minishell.h	/^	TK_REDIR_IN,				\/\/ <$/;"	e	enum:e_token_type
+TK_REDIR_OUT	includes/minishell.h	/^	TK_REDIR_OUT,				\/\/ >$/;"	e	enum:e_token_type
+TK_WORD	includes/minishell.h	/^	TK_WORD,					\/\/ Words, Arguments$/;"	e	enum:e_token_type
+Table of Contents	IMPLEMENTATION_GUIDE.md	/^## Table of Contents$/;"	s	chapter:Minishell - Complete Implementation Guide
+The Pipeline	IMPLEMENTATION_GUIDE.md	/^## The Pipeline$/;"	s	chapter:Minishell - Complete Implementation Guide
+VALGRIND	Makefile	/^VALGRIND = valgrind$/;"	m
+VG_FLAGS	Makefile	/^VG_FLAGS = --leak-check=full \\$/;"	m
+WHITE	Makefile	/^WHITE   = \\033[0;37m$/;"	m
+YELLOW	Makefile	/^YELLOW  = \\033[0;33m$/;"	m
+add_var_to_env	src/env/env_modify.c	/^void	add_var_to_env(char ***env, char *var)$/;"	f	typeref:typename:void
+all	Makefile	/^all: $(NAME) $(LIBFT) readline.supp$/;"	t
+all	libft/Makefile	/^all: $(NAME)$/;"	t
+append_char	src/utils/utils2.c	/^static char	*append_char(char *line, char c)$/;"	f	typeref:typename:char *	file:
+apply_heredoc	src/exec/redirs.c	/^static int	apply_heredoc(t_cmd *cmd)$/;"	f	typeref:typename:int	file:
+apply_redir	src/exec/redirs.c	/^static int	apply_redir(char *file, int flags, int std_fd)$/;"	f	typeref:typename:int	file:
+args	includes/minishell.h	/^	char			**args;		\/\/ Command Args$/;"	m	struct:s_cmd	typeref:typename:char **
+argv_len	src/parser/parser_utils.c	/^static int	argv_len(char **argv)$/;"	f	typeref:typename:int	file:
+bonus	libft/Makefile	/^bonus: $(BONUS_FLAG)$/;"	t
+build_full_word	src/lexer/lexer_word.c	/^char	*build_full_word(char *line, int *i, t_shell *shell, int *quoted)$/;"	f	typeref:typename:char *
+build_full_word()	IMPLEMENTATION_GUIDE.md	/^### build_full_word()$/;"	S	section:Minishell - Complete Implementation Guide""Lexer (Tokenization)
+cd	IMPLEMENTATION_GUIDE.md	/^#### cd$/;"	t	subsection:Minishell - Complete Implementation Guide""Builtins""Builtin Examples
+check_pipe_syntax	src/parser/parser.c	/^static int	check_pipe_syntax(t_token *current)$/;"	f	typeref:typename:int	file:
+check_redir_syntax	src/parser/parser.c	/^static int	check_redir_syntax(t_token *current)$/;"	f	typeref:typename:int	file:
+child_exec	src/exec/child.c	/^static void	child_exec(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void	file:
+child_process	src/exec/child.c	/^void	child_process(t_cmd *cmd, int fd_in, int *fd_pipe, t_shell *shell)$/;"	f	typeref:typename:void
+child_process()	IMPLEMENTATION_GUIDE.md	/^### child_process()$/;"	S	section:Minishell - Complete Implementation Guide""Executor
+clean	Makefile	/^clean:$/;"	t
+clean	libft/Makefile	/^clean:$/;"	t
+cleanup_exit_child	src/utils/free.c	/^void	cleanup_exit_child(t_shell *shell, int exit_code)$/;"	f	typeref:typename:void
+cmd_add_arg	src/parser/parser_utils.c	/^void	cmd_add_arg(t_cmd *cmd, char *arg)$/;"	f	typeref:typename:void
+cmd_add_back	src/parser/parser_utils.c	/^void	cmd_add_back(t_cmd **cmds, t_cmd *new_node)$/;"	f	typeref:typename:void
+content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list	typeref:typename:void *
+copy_env	src/env/env_init.c	/^char	**copy_env(char **envp)$/;"	f	typeref:typename:char **
+copy_env()	IMPLEMENTATION_GUIDE.md	/^### copy_env()$/;"	S	section:Minishell - Complete Implementation Guide""Environment Variables
+count_env	src/env/env_init.c	/^static int	count_env(char **envp)$/;"	f	typeref:typename:int	file:
+e_redir_type	includes/minishell.h	/^typedef enum e_redir_type$/;"	g
+e_token_type	includes/minishell.h	/^typedef enum e_token_type$/;"	g
+echo	IMPLEMENTATION_GUIDE.md	/^#### echo$/;"	t	subsection:Minishell - Complete Implementation Guide""Builtins""Builtin Examples
+env	includes/minishell.h	/^	char	**env;$/;"	m	struct:s_hd_ctx	typeref:typename:char **
+env_vars	includes/minishell.h	/^	char			**env_vars;		\/\/ Environment variables$/;"	m	struct:s_shell	typeref:typename:char **
+exec_builtin	src/builtins/builtins_router.c	/^int	exec_builtin(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:int
+exec_builtin()	IMPLEMENTATION_GUIDE.md	/^### exec_builtin()$/;"	S	section:Minishell - Complete Implementation Guide""Builtins
+exec_single_builtin	src/exec/execute.c	/^static void	exec_single_builtin(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void	file:
+execute_pipe	src/exec/execute.c	/^void	execute_pipe(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void
+execute_pipe()	IMPLEMENTATION_GUIDE.md	/^### execute_pipe()$/;"	S	section:Minishell - Complete Implementation Guide""Executor
+execution_error	src/exec/exec_errors.c	/^void	execution_error(char *cmd, int code, t_shell *shell)$/;"	f	typeref:typename:void
+executor	src/exec/execute.c	/^void	executor(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void
+executor()	IMPLEMENTATION_GUIDE.md	/^### executor()$/;"	S	section:Minishell - Complete Implementation Guide""Executor
+exit_code	includes/minishell.h	/^	int				exit_code;		\/\/ Exit code$/;"	m	struct:s_shell	typeref:typename:int
+exit_code	includes/minishell.h	/^	int		exit_code;$/;"	m	struct:s_hd_ctx	typeref:typename:int
+exit_numeric_error	src/builtins/builtin_exit.c	/^static void	exit_numeric_error(char *arg, t_shell *shell)$/;"	f	typeref:typename:void	file:
+exp_and_append	src/env/env_modify.c	/^static void	exp_and_append(char *arg, char ***env, char *equal_pos)$/;"	f	typeref:typename:void	file:
+expand	includes/minishell.h	/^	int		expand;$/;"	m	struct:s_hd_ctx	typeref:typename:int
+expand_tokens	src/expander/expander.c	/^void	expand_tokens(t_token *tokens, char **env, int last_exit)$/;"	f	typeref:typename:void
+expand_var_name	src/expander/expander.c	/^static char	*expand_var_name(char *str, int *i, char **env)$/;"	f	typeref:typename:char *	file:
+expand_vars	src/expander/expander.c	/^char	*expand_vars(char *str, char **env, int last_exit)$/;"	f	typeref:typename:char *
+expand_vars()	IMPLEMENTATION_GUIDE.md	/^### expand_vars()$/;"	S	section:Minishell - Complete Implementation Guide""Expander (Variable Expansion)
+extract_and_expand_var	src/expander/expander.c	/^static char	*extract_and_expand_var(char *str, int *i, char **env,$/;"	f	typeref:typename:char *	file:
+extract_and_expand_var()	IMPLEMENTATION_GUIDE.md	/^### extract_and_expand_var()$/;"	S	section:Minishell - Complete Implementation Guide""Expander (Variable Expansion)
+extract_quoted_content	src/lexer/lexer_word.c	/^static char	*extract_quoted_content(char *line, int *i)$/;"	f	typeref:typename:char *	file:
+extract_unquoted	src/lexer/lexer_word.c	/^static char	*extract_unquoted(char *line, int *i)$/;"	f	typeref:typename:char *	file:
+fclean	Makefile	/^fclean:$/;"	t
+fclean	libft/Makefile	/^fclean: clean$/;"	t
+fd	includes/minishell.h	/^	int		fd;$/;"	m	struct:s_hd_ctx	typeref:typename:int
+find_path	src/exec/path.c	/^char	*find_path(char *cmd, char **envp)$/;"	f	typeref:typename:char *
+free_all	src/utils/free.c	/^void	free_all(t_shell *shell)$/;"	f	typeref:typename:void
+free_cmds	src/utils/free.c	/^void	free_cmds(t_cmd *cmds)$/;"	f	typeref:typename:void
+free_cmds()	IMPLEMENTATION_GUIDE.md	/^### free_cmds()$/;"	S	section:Minishell - Complete Implementation Guide""Memory Management
+free_env	src/env/env_init.c	/^void	free_env(char **env)$/;"	f	typeref:typename:void
+free_redirs	src/utils/free.c	/^static void	free_redirs(t_redir *redir)$/;"	f	typeref:typename:void	file:
+free_tab	src/utils/utils.c	/^void	free_tab(char **tab)$/;"	f	typeref:typename:void
+free_tokens	src/utils/free.c	/^void	free_tokens(t_token *list)$/;"	f	typeref:typename:void
+free_tokens()	IMPLEMENTATION_GUIDE.md	/^### free_tokens()$/;"	S	section:Minishell - Complete Implementation Guide""Memory Management
+ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *nptr)$/;"	f	typeref:typename:int
+ft_atoll_overflow	src/utils/utils2.c	/^int	ft_atoll_overflow(const char *str, long long *res)$/;"	f	typeref:typename:int
+ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f	typeref:typename:void
+ft_calloc	libft/ft_calloc.c	/^void	*ft_calloc(size_t nmemb, size_t size)$/;"	f	typeref:typename:void *
+ft_cd	src/builtins/builtin_cd.c	/^int	ft_cd(char **args, char ***env)$/;"	f	typeref:typename:int
+ft_count_letters	libft/ft_itoa.c	/^static int	ft_count_letters(long nb)$/;"	f	typeref:typename:int	file:
+ft_countwords	libft/ft_split.c	/^static int	ft_countwords(const char *s, char c)$/;"	f	typeref:typename:int	file:
+ft_echo	src/builtins/builtins_info.c	/^int	ft_echo(char **args)$/;"	f	typeref:typename:int
+ft_env	src/builtins/builtins_env.c	/^int	ft_env(char **args, char **env)$/;"	f	typeref:typename:int
+ft_exit	src/builtins/builtin_exit.c	/^int	ft_exit(char **args, t_shell *shell)$/;"	f	typeref:typename:int
+ft_export	src/builtins/builtins_env.c	/^int	ft_export(char **args, char ***env)$/;"	f	typeref:typename:int
+ft_export()	IMPLEMENTATION_GUIDE.md	/^### ft_export()$/;"	S	section:Minishell - Complete Implementation Guide""Environment Variables
+ft_free	libft/ft_split.c	/^static void	ft_free(char **result)$/;"	f	typeref:typename:void	file:
+ft_isalnum	libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f	typeref:typename:int
+ft_isalpha	libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f	typeref:typename:int
+ft_isascii	libft/ft_isascii.c	/^int	ft_isascii(int c)$/;"	f	typeref:typename:int
+ft_isdigit	libft/ft_isdigit.c	/^int	ft_isdigit(int n)$/;"	f	typeref:typename:int
+ft_isprint	libft/ft_isprint.c	/^int	ft_isprint(int c)$/;"	f	typeref:typename:int
+ft_isspace	src/utils/utils.c	/^int	ft_isspace(int c)$/;"	f	typeref:typename:int
+ft_itoa	libft/ft_itoa.c	/^char	*ft_itoa(int n)$/;"	f	typeref:typename:char *
+ft_lstadd_back	libft/ft_lstadd_back_bonus.c	/^void	ft_lstadd_back(t_list **lst, t_list *new)$/;"	f	typeref:typename:void
+ft_lstadd_front	libft/ft_lstadd_front_bonus.c	/^void	ft_lstadd_front(t_list **lst, t_list *new)$/;"	f	typeref:typename:void
+ft_lstclear	libft/ft_lstclear_bonus.c	/^void	ft_lstclear(t_list **lst, void (*del)(void *))$/;"	f	typeref:typename:void
+ft_lstdelone	libft/ft_lstdelone_bonus.c	/^void	ft_lstdelone(t_list *lst, void (*del)(void *))$/;"	f	typeref:typename:void
+ft_lstiter	libft/ft_lstiter_bonus.c	/^void	ft_lstiter(t_list *lst, void (*f)(void *))$/;"	f	typeref:typename:void
+ft_lstlast	libft/ft_lstlast_bonus.c	/^t_list	*ft_lstlast(t_list *lst)$/;"	f	typeref:typename:t_list *
+ft_lstmap	libft/ft_lstmap_bonus.c	/^t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))$/;"	f	typeref:typename:t_list *
+ft_lstnew	libft/ft_lstnew_bonus.c	/^t_list	*ft_lstnew(void *content)$/;"	f	typeref:typename:t_list *
+ft_lstsize	libft/ft_lstsize_bonus.c	/^int	ft_lstsize(t_list *lst)$/;"	f	typeref:typename:int
+ft_memchr	libft/ft_memchr.c	/^void	*ft_memchr(const void *s, int c, size_t n)$/;"	f	typeref:typename:void *
+ft_memcmp	libft/ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *s2, size_t n)$/;"	f	typeref:typename:int
+ft_memcpy	libft/ft_memcpy.c	/^void	*ft_memcpy(void *dest, const void *src, size_t n)$/;"	f	typeref:typename:void *
+ft_memmove	libft/ft_memmove.c	/^void	*ft_memmove(void *dest, const void *src, size_t n)$/;"	f	typeref:typename:void *
+ft_memset	libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f	typeref:typename:void *
+ft_newstring	libft/ft_strtrim.c	/^static char	*ft_newstring(const char *s1, size_t start, size_t len)$/;"	f	typeref:typename:char *	file:
+ft_putchar_fd	libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f	typeref:typename:void
+ft_putendl_fd	libft/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f	typeref:typename:void
+ft_putnbr_fd	libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f	typeref:typename:void
+ft_putstr_fd	libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f	typeref:typename:void
+ft_pwd	src/builtins/builtins_info.c	/^int	ft_pwd(t_shell *shell)$/;"	f	typeref:typename:int
+ft_search	libft/ft_split.c	/^static int	ft_search(const char *s, char c)$/;"	f	typeref:typename:int	file:
+ft_split	libft/ft_split.c	/^char	**ft_split(char const *s, char c)$/;"	f	typeref:typename:char **
+ft_strchr	libft/ft_strchr.c	/^char	*ft_strchr(const char *str, int c)$/;"	f	typeref:typename:char *
+ft_strcmp	src/utils/utils.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f	typeref:typename:int
+ft_strdup	libft/ft_strdup.c	/^char	*ft_strdup(const char *s)$/;"	f	typeref:typename:char *
+ft_striteri	libft/ft_striteri.c	/^void	ft_striteri(char *s, void (*f)(unsigned int, char*))$/;"	f	typeref:typename:void
+ft_strjoin	libft/ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f	typeref:typename:char *
+ft_strlcat	libft/ft_strlcat.c	/^size_t	ft_strlcat(char *dst, const char *src, size_t size)$/;"	f	typeref:typename:size_t
+ft_strlcpy	libft/ft_strlcpy.c	/^size_t	ft_strlcpy(char *dst, const char *src, size_t size)$/;"	f	typeref:typename:size_t
+ft_strlen	libft/ft_strlen.c	/^size_t	ft_strlen(const char *s)$/;"	f	typeref:typename:size_t
+ft_strmapi	libft/ft_strmapi.c	/^char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))$/;"	f	typeref:typename:char *
+ft_strncmp	libft/ft_strncmp.c	/^int	ft_strncmp(const char *s1, const char *s2, size_t n)$/;"	f	typeref:typename:int
+ft_strnstr	libft/ft_strnstr.c	/^char	*ft_strnstr(const char *haystack, const char *needle, size_t len)$/;"	f	typeref:typename:char *
+ft_strrchr	libft/ft_strrchr.c	/^char	*ft_strrchr(const char *str, int c)$/;"	f	typeref:typename:char *
+ft_strtrim	libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const *set)$/;"	f	typeref:typename:char *
+ft_substr	libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f	typeref:typename:char *
+ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f	typeref:typename:int
+ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f	typeref:typename:int
+ft_trim	libft/ft_strtrim.c	/^static int	ft_trim(const char *set, char c)$/;"	f	typeref:typename:int	file:
+ft_unset	src/builtins/builtins_env.c	/^int	ft_unset(char **args, char ***env)$/;"	f	typeref:typename:int
+g_last_signal	src/signals/signals.c	/^int	g_last_signal = 0;$/;"	v	typeref:typename:int
+get_env_value	src/env/env_get.c	/^char	*get_env_value(char **env, char *key)$/;"	f	typeref:typename:char *
+get_env_value()	IMPLEMENTATION_GUIDE.md	/^### get_env_value()$/;"	S	section:Minishell - Complete Implementation Guide""Environment Variables
+get_input	src/main.c	/^static char	*get_input(t_shell *shell)$/;"	f	typeref:typename:char *	file:
+get_input()	IMPLEMENTATION_GUIDE.md	/^### get_input()$/;"	S	section:Minishell - Complete Implementation Guide""Main Loop
+get_matrix_len	src/env/env_get.c	/^int	get_matrix_len(char **env)$/;"	f	typeref:typename:int
+get_target_dir	src/builtins/builtin_cd.c	/^static void	*get_target_dir(char **args, char **env)$/;"	f	typeref:typename:void *	file:
+get_var_value	src/expander/expander.c	/^static char	*get_var_value(char *var_name, char **env)$/;"	f	typeref:typename:char *	file:
+handle_exec_path	src/exec/child.c	/^static void	handle_exec_path(t_cmd *cmd, t_shell *shell)$/;"	f	typeref:typename:void	file:
+handle_heredoc	src/heredoc/heredoc.c	/^int	handle_heredoc(char *delimiter, char **env, int last_exit)$/;"	f	typeref:typename:int
+handle_heredoc()	IMPLEMENTATION_GUIDE.md	/^### handle_heredoc()$/;"	S	section:Minishell - Complete Implementation Guide""Heredoc
+handle_pipes	src/exec/child.c	/^void	handle_pipes(t_cmd *cmd, int fd_in, int *fd_pipe)$/;"	f	typeref:typename:void
+handle_pipes()	IMPLEMENTATION_GUIDE.md	/^### handle_pipes()$/;"	S	section:Minishell - Complete Implementation Guide""Executor
+handle_redir_in	src/lexer/lexer.c	/^static void	handle_redir_in(t_token **tokens, char *line, int *i)$/;"	f	typeref:typename:void	file:
+handle_redir_out	src/lexer/lexer.c	/^static void	handle_redir_out(t_token **tokens, char *line, int *i)$/;"	f	typeref:typename:void	file:
+handle_redirection	src/exec/redirs.c	/^int	handle_redirection(t_cmd *cmd)$/;"	f	typeref:typename:int
+handle_redirection()	IMPLEMENTATION_GUIDE.md	/^### handle_redirection()$/;"	S	section:Minishell - Complete Implementation Guide""Executor
+handle_sigint	src/signals/signals.c	/^void	handle_sigint(int sig)$/;"	f	typeref:typename:void
+handle_sigint()	IMPLEMENTATION_GUIDE.md	/^### handle_sigint()$/;"	S	section:Minishell - Complete Implementation Guide""Signals
+handle_sigint_heredoc	src/signals/signals.c	/^static void	handle_sigint_heredoc(int sig)$/;"	f	typeref:typename:void	file:
+handle_word_part	src/lexer/lexer_word.c	/^static char	*handle_word_part(char *line, int *i, t_shell *shell,$/;"	f	typeref:typename:char *	file:
+handle_word_part()	IMPLEMENTATION_GUIDE.md	/^### handle_word_part()$/;"	S	section:Minishell - Complete Implementation Guide""Lexer (Tokenization)
+has_unclosed_quotes	src/utils/main_utils.c	/^static int	has_unclosed_quotes(char *line)$/;"	f	typeref:typename:int	file:
+heredoc_eof_warning	src/heredoc/heredoc_utils.c	/^void	heredoc_eof_warning(char *delimiter)$/;"	f	typeref:typename:void
+heredoc_fd	includes/minishell.h	/^	int				heredoc_fd;	\/\/ FD for heredoc$/;"	m	struct:s_cmd	typeref:typename:int
+heredoc_gen_temp_filename	src/heredoc/heredoc_utils.c	/^char	*heredoc_gen_temp_filename(void)$/;"	f	typeref:typename:char *
+heredoc_has_quotes	src/heredoc/heredoc_utils.c	/^int	heredoc_has_quotes(char *delimiter)$/;"	f	typeref:typename:int
+heredoc_read	src/heredoc/heredoc.c	/^static int	heredoc_read(t_hd_ctx *ctx, char *delim)$/;"	f	typeref:typename:int	file:
+heredoc_read_line	src/heredoc/heredoc_utils.c	/^char	*heredoc_read_line(void)$/;"	f	typeref:typename:char *
+heredoc_remove_quotes	src/heredoc/heredoc_utils.c	/^char	*heredoc_remove_quotes(char *delimiter)$/;"	f	typeref:typename:char *
+in_dquotes	includes/minishell.h	/^	int				in_dquotes;	\/\/ Came from double quotes?$/;"	m	struct:s_token	typeref:typename:int
+init_shell	src/main.c	/^static void	init_shell(t_shell *shell, char **envp)$/;"	f	typeref:typename:void	file:
+is_builtin	src/builtins/builtins_router.c	/^int	is_builtin(char **args)$/;"	f	typeref:typename:int
+is_builtin()	IMPLEMENTATION_GUIDE.md	/^### is_builtin()$/;"	S	section:Minishell - Complete Implementation Guide""Builtins
+is_comment_line	src/utils/main_utils.c	/^static int	is_comment_line(char *line)$/;"	f	typeref:typename:int	file:
+is_end_of_word	src/lexer/lexer_word.c	/^static int	is_end_of_word(char c)$/;"	f	typeref:typename:int	file:
+is_key_match	src/builtins/builtins_env.c	/^static int	is_key_match(char *env_var, char *key)$/;"	f	typeref:typename:int	file:
+is_right_assignment	src/exec/exec_errors.c	/^int	is_right_assignment(char *str)$/;"	f	typeref:typename:int
+is_space	src/lexer/lexer_utils.c	/^int	is_space(char c)$/;"	f	typeref:typename:int
+is_special	src/lexer/lexer_utils.c	/^int	is_special(char c)$/;"	f	typeref:typename:int
+is_valid_key	src/env/env_modify.c	/^int	is_valid_key(char *str)$/;"	f	typeref:typename:int
+is_valid_n_flag	src/builtins/builtins_info.c	/^int	is_valid_n_flag(char *str)$/;"	f	typeref:typename:int
+join_and_free	src/lexer/lexer_utils.c	/^char	*join_and_free(char *s1, char *s2)$/;"	f	typeref:typename:char *
+lexer	src/lexer/lexer.c	/^t_token	*lexer(char *line, t_shell *shell)$/;"	f	typeref:typename:t_token *
+lexer()	IMPLEMENTATION_GUIDE.md	/^### lexer()$/;"	S	section:Minishell - Complete Implementation Guide""Lexer (Tokenization)
+limits	includes/minishell.h	/^	char			**limits;	\/\/ Heredoc delimiters$/;"	m	struct:s_cmd	typeref:typename:char **
+main	src/main.c	/^int	main(int argc, char **argv, char **envp)$/;"	f	typeref:typename:int
+main.c	IMPLEMENTATION_GUIDE.md	/^### main.c$/;"	S	section:Minishell - Complete Implementation Guide""Main Loop
+manage_pwd	src/builtins/builtin_cd.c	/^static void	manage_pwd(char ***env, char *old_pwd, char *target)$/;"	f	typeref:typename:void	file:
+minishelll_tests	README.md	/^# minishelll_tests$/;"	c
+new_cmd	src/parser/parser_utils.c	/^t_cmd	*new_cmd(void)$/;"	f	typeref:typename:t_cmd *
+new_token	src/lexer/lexer_utils.c	/^t_token	*new_token(char *tk_str, t_token_type type)$/;"	f	typeref:typename:t_token *
+next	includes/minishell.h	/^	struct s_cmd	*next;		\/\/ Next command in pipe$/;"	m	struct:s_cmd	typeref:struct:s_cmd *
+next	includes/minishell.h	/^	struct s_redir	*next;		\/\/ Pointer for next redirection$/;"	m	struct:s_redir	typeref:struct:s_redir *
+next	includes/minishell.h	/^	struct s_token	*next;		\/\/ Pointer for next token$/;"	m	struct:s_token	typeref:struct:s_token *
+next	libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
+no_expand	includes/minishell.h	/^	int				no_expand;	\/\/ Expand or not$/;"	m	struct:s_token	typeref:typename:int
+overflow_check	src/utils/utils2.c	/^static int	overflow_check(unsigned long long n, char c, int sign)$/;"	f	typeref:typename:int	file:
+parse_redir_in	src/parser/parser_redir.c	/^void	parse_redir_in(t_cmd *current_cmd, t_token **tokens)$/;"	f	typeref:typename:void
+parse_redir_in()	IMPLEMENTATION_GUIDE.md	/^### parse_redir_in()$/;"	S	section:Minishell - Complete Implementation Guide""Parser
+parse_redir_out	src/parser/parser_redir.c	/^void	parse_redir_out(t_cmd *current_cmd, t_token **tokens)$/;"	f	typeref:typename:void
+parse_sign_and_skip	src/utils/utils2.c	/^static int	parse_sign_and_skip(const char *str, int *i, int *sign)$/;"	f	typeref:typename:int	file:
+parser	src/parser/parser.c	/^t_cmd	*parser(t_token *tokens, t_shell *shell)$/;"	f	typeref:typename:t_cmd *
+parser()	IMPLEMENTATION_GUIDE.md	/^### parser()$/;"	S	section:Minishell - Complete Implementation Guide""Parser
+pipe_loop	src/exec/execute.c	/^static void	pipe_loop(t_cmd *cmd, int *fd_in, pid_t *pid, t_shell *sh)$/;"	f	typeref:typename:void	file:
+print_cd_error	src/builtins/builtin_cd.c	/^static void	print_cd_error(char *arg, int is_getcwd)$/;"	f	typeref:typename:void	file:
+print_cmds	src/utils/debug.c	/^void	print_cmds(t_cmd *cmd)$/;"	f	typeref:typename:void
+print_error_message	src/exec/exec_errors.c	/^static void	print_error_message(char *cmd, char *msg)$/;"	f	typeref:typename:void	file:
+print_export_line	src/builtins/export_print.c	/^static void	print_export_line(char *env_var)$/;"	f	typeref:typename:void	file:
+print_redir	src/utils/debug.c	/^static void	print_redir(t_redir *redir)$/;"	f	typeref:typename:void	file:
+print_tokens	src/utils/debug.c	/^void	print_tokens(t_token *tokens)$/;"	f	typeref:typename:void
+process_char	src/lexer/lexer.c	/^static void	process_char(t_token **tokens, char *line, int *i,$/;"	f	typeref:typename:void	file:
+process_char()	IMPLEMENTATION_GUIDE.md	/^### process_char()$/;"	S	section:Minishell - Complete Implementation Guide""Lexer (Tokenization)
+process_heredocs	src/heredoc/heredoc.c	/^void	process_heredocs(t_cmd *cmds, char **env, int last_exit)$/;"	f	typeref:typename:void
+process_line	src/utils/main_utils.c	/^void	process_line(char *line, t_shell *shell)$/;"	f	typeref:typename:void
+process_line()	IMPLEMENTATION_GUIDE.md	/^### process_line()$/;"	S	section:Minishell - Complete Implementation Guide""Main Loop
+process_token	src/parser/parser.c	/^static void	process_token(t_cmd **cmds, t_cmd **cur, t_token **tokens)$/;"	f	typeref:typename:void	file:
+process_token()	IMPLEMENTATION_GUIDE.md	/^### process_token()$/;"	S	section:Minishell - Complete Implementation Guide""Parser
+re	Makefile	/^re: fclean all$/;"	t
+re	libft/Makefile	/^re: fclean all$/;"	t
+read_heredoc_lines	src/heredoc/heredoc.c	/^static int	read_heredoc_lines(t_hd_ctx *ctx, char *delimiter)$/;"	f	typeref:typename:int	file:
+read_heredoc_lines()	IMPLEMENTATION_GUIDE.md	/^### read_heredoc_lines()$/;"	S	section:Minishell - Complete Implementation Guide""Heredoc
+read_line	src/utils/utils2.c	/^char	*read_line(void)$/;"	f	typeref:typename:char *
+readline.supp	Makefile	/^readline.supp:$/;"	t
+redir_add_back	src/parser/parser_utils.c	/^void	redir_add_back(t_redir **list, t_redir *new_node)$/;"	f	typeref:typename:void
+redirs	includes/minishell.h	/^	t_redir			*redirs;	\/\/ Redirects list$/;"	m	struct:s_cmd	typeref:typename:t_redir *
+remove_env_var	src/builtins/builtins_env.c	/^static void	remove_env_var(char *key, char ***env)$/;"	f	typeref:typename:void	file:
+resolve_cmd_path	src/exec/child.c	/^static char	*resolve_cmd_path(t_cmd *cmd, t_shell *shell, int *malloced)$/;"	f	typeref:typename:char *	file:
+s_cmd	includes/minishell.h	/^typedef struct s_cmd$/;"	s
+s_cmds	includes/minishell.h	/^	t_cmd			*s_cmds;$/;"	m	struct:s_shell	typeref:typename:t_cmd *
+s_hd_ctx	includes/minishell.h	/^typedef struct s_hd_ctx$/;"	s
+s_list	libft/libft.h	/^typedef struct s_list$/;"	s
+s_redir	includes/minishell.h	/^typedef struct s_redir$/;"	s
+s_shell	includes/minishell.h	/^typedef struct s_shell$/;"	s
+s_token	includes/minishell.h	/^typedef struct s_token$/;"	s
+s_tokens	includes/minishell.h	/^	t_token			*s_tokens;$/;"	m	struct:s_shell	typeref:typename:t_token *
+search_path	src/exec/path.c	/^static char	*search_path(char **paths, char *cmd)$/;"	f	typeref:typename:char *	file:
+setup_signals	src/signals/signals.c	/^void	setup_signals(void)$/;"	f	typeref:typename:void
+setup_signals()	IMPLEMENTATION_GUIDE.md	/^### setup_signals()$/;"	S	section:Minishell - Complete Implementation Guide""Signals
+setup_signals_execution	src/signals/signals.c	/^void	setup_signals_execution(void)$/;"	f	typeref:typename:void
+setup_signals_heredoc	src/signals/signals.c	/^void	setup_signals_heredoc(void)$/;"	f	typeref:typename:void
+shell_loop	src/main.c	/^static void	shell_loop(t_shell *shell)$/;"	f	typeref:typename:void	file:
+shell_loop()	IMPLEMENTATION_GUIDE.md	/^### shell_loop()$/;"	S	section:Minishell - Complete Implementation Guide""Main Loop
+shlvl_update	src/env/env_init.c	/^void	shlvl_update(char ***env)$/;"	f	typeref:typename:void
+show_export_list	src/builtins/export_print.c	/^void	show_export_list(char **env)$/;"	f	typeref:typename:void
+sort_env_matrix	src/builtins/export_print.c	/^static void	sort_env_matrix(char **matrix, int len)$/;"	f	typeref:typename:void	file:
+special_expand_params	src/utils/utils.c	/^char	*special_expand_params(char c, int last_exit)$/;"	f	typeref:typename:char *
+t_cmd	IMPLEMENTATION_GUIDE.md	/^### t_cmd$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+t_cmd	includes/minishell.h	/^}	t_cmd;$/;"	t	typeref:struct:s_cmd
+t_hd_ctx	includes/minishell.h	/^}	t_hd_ctx;$/;"	t	typeref:struct:s_hd_ctx
+t_list	libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
+t_redir	IMPLEMENTATION_GUIDE.md	/^### t_redir$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+t_redir	includes/minishell.h	/^}	t_redir;$/;"	t	typeref:struct:s_redir
+t_redir_type	includes/minishell.h	/^}	t_redir_type;$/;"	t	typeref:enum:e_redir_type
+t_redir_type (Enum)	IMPLEMENTATION_GUIDE.md	/^### t_redir_type (Enum)$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+t_shell	IMPLEMENTATION_GUIDE.md	/^### t_shell$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+t_shell	includes/minishell.h	/^}	t_shell;$/;"	t	typeref:struct:s_shell
+t_token	IMPLEMENTATION_GUIDE.md	/^### t_token$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+t_token	includes/minishell.h	/^}	t_token;$/;"	t	typeref:struct:s_token
+t_token_type	includes/minishell.h	/^}	t_token_type;$/;"	t	typeref:enum:e_token_type
+t_token_type (Enum)	IMPLEMENTATION_GUIDE.md	/^### t_token_type (Enum)$/;"	S	section:Minishell - Complete Implementation Guide""Data Structures
+target	includes/minishell.h	/^	char			*target;	\/\/ File name or delimiter$/;"	m	struct:s_redir	typeref:typename:char *
+token_add_back	src/lexer/lexer_utils.c	/^void	token_add_back(t_token **tokens, t_token *new_node)$/;"	f	typeref:typename:void
+type	includes/minishell.h	/^	t_redir_type	type;		\/\/ Redirection type$/;"	m	struct:s_redir	typeref:typename:t_redir_type
+type	includes/minishell.h	/^	t_token_type	type;		\/\/ Token value$/;"	m	struct:s_token	typeref:typename:t_token_type
+update_env	src/env/env_modify.c	/^void	update_env(char *arg, char ***env)$/;"	f	typeref:typename:void
+update_w_export	src/builtins/builtin_cd.c	/^static void	update_w_export(char ***env, char *key, char *value)$/;"	f	typeref:typename:void	file:
+valgrind	Makefile	/^valgrind: $(NAME)$/;"	t
+valgrind_fd	Makefile	/^valgrind_fd: $(NAME)$/;"	t
+validate_line	src/utils/main_utils.c	/^int	validate_line(char *line, t_shell *shell)$/;"	f	typeref:typename:int
+validate_line()	IMPLEMENTATION_GUIDE.md	/^### validate_line()$/;"	S	section:Minishell - Complete Implementation Guide""Main Loop
+validate_syntax	src/parser/parser.c	/^static int	validate_syntax(t_token *tokens)$/;"	f	typeref:typename:int	file:
+value	includes/minishell.h	/^	char			*value;		\/\/ Type of token$/;"	m	struct:s_token	typeref:typename:char *
+wait_children	src/exec/execute.c	/^static void	wait_children(pid_t last_pid, t_shell *shell)$/;"	f	typeref:typename:void	file:
+write_hd_line	src/heredoc/heredoc.c	/^static void	write_hd_line(t_hd_ctx *ctx, char *line)$/;"	f	typeref:typename:void	file:
