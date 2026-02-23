@@ -72,5 +72,5 @@ int	main(int argc, char **argv, char **envp)
 	shell_loop(&shell);
 	free_env(shell.env_vars);
 	rl_clear_history();
-	return (0);
+	return (shell.exit_code);
 }

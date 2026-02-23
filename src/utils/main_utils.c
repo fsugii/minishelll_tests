@@ -65,7 +65,30 @@ int	validate_line(char *line, t_shell *shell)
 	return (0);
 }
 
-void	process_line(char *line, t_shell *shell)
+static char	*next_semicolon(char *line)
+{
+	int	in_quote;
+	char	quote;
+
+	in_quote = 0;
+	quote = 0;
+	while (*line)
+	{
+		if (!in_quote && (*line == '\'' || *line == '"'))
+		{
+			in_quote = 1;
+			quote = *line;
+		}
+		else if (in_quote && *line == quote)
+			in_quote = 0;
+		else if (!in_quote && *line == ';')
+			return (line);
+		line++;
+	}
+	return (NULL);
+}
+
+static void	exec_single(char *line, t_shell *shell)
 {
 	t_token	*tokens;
 	t_cmd	*cmds;
@@ -84,5 +107,28 @@ void	process_line(char *line, t_shell *shell)
 		}
 		free_tokens(tokens);
 		shell->s_tokens = NULL;
+	}
+}
+
+void	process_line(char *line, t_shell *shell)
+{
+	char	*semi;
+	char	*segment;
+
+	while (line)
+	{
+		semi = next_semicolon(line);
+		if (semi)
+		{
+			segment = ft_substr(line, 0, semi - line);
+			exec_single(segment, shell);
+			free(segment);
+			line = semi + 1;
+		}
+		else
+		{
+			exec_single(line, shell);
+			break ;
+		}
 	}
 }

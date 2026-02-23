@@ -54,7 +54,7 @@ static void	process_char(t_token **tokens, char *line, int *i,
 		word = build_full_word(line, i, shell, &quoted);
 		tok = new_token(word, TK_WORD);
 		if (tok && quoted)
-			tok->in_dquotes = 1;
+			tok->no_expand = 1;
 		token_add_back(tokens, tok);
 		free(word);
 		(*i)--;

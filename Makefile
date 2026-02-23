@@ -6,7 +6,7 @@
 #    By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/22 18:35:54 by fshiniti          #+#    #+#              #
-#    Updated: 2026/02/20 23:40:00 by fshiniti         ###   ########.fr        #
+#    Updated: 2026/02/23 16:29:34 by fshiniti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ NAME = minishell
 CC = cc
 
 #flags
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address,undefined
-LDFLAGS = -lreadline -fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS = -lreadline -fsanitize=address
 
 #directories
 SRC_DIR = src

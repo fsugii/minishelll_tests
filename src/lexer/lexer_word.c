@@ -74,13 +74,16 @@ char	*build_full_word(char *line, int *i, t_shell *shell, int *quoted)
 {
 	char	*result;
 	char	*part;
+	int		had_quotes;
 
 	result = ft_strdup("");
 	*quoted = 0;
+	had_quotes = (line[*i] == '\'' || line[*i] == '"');
 	while (line[*i] && !is_end_of_word(line[*i]))
 	{
 		part = handle_word_part(line, i, shell, quoted);
 		result = join_and_free(result, part);
 	}
+	*quoted = had_quotes;
 	return (result);
 }
