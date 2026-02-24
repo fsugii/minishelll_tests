@@ -6,58 +6,78 @@
 /*   By: fshiniti <fshiniti@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 23:00:00 by fshiniti          #+#    #+#             */
-/*   Updated: 2026/02/20 23:00:00 by fshiniti         ###   ########.fr       */
+/*   Updated: 2026/02/24 12:00:00 by fshiniti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parse_redir_in(t_cmd *current_cmd, t_token **tokens)
+/*
+** Wraps the delimiter in quotes so heredoc_has_quotes() detects it
+** and disables variable expansion inside the heredoc body.
+** Called when the delimiter token came from single quotes (no_expand=1).
+*/
+static char	*quoted_target(char *value)
+{
+	char	*tmp;
+	char	*result;
+
+	tmp = ft_strjoin("'", value);
+	result = ft_strjoin(tmp, "'");
+	free(tmp);
+	return (result);
+}
+
+static t_redir	*new_redir(t_redir_type type)
 {
 	t_redir	*redir;
-	char	*tmp;
 
 	redir = malloc(sizeof(t_redir));
 	if (!redir)
-		return ;
+		return (NULL);
+	redir->type = type;
+	redir->target = NULL;
+	redir->next = NULL;
+	return (redir);
+}
+
+void	parse_redir_in(t_cmd *current_cmd, t_token **tokens)
+{
+	t_redir			*redir;
+	t_redir_type	type;
+
 	if ((*tokens)->type == TK_HEREDOC)
-		redir->type = REDIR_HEREDOC;
+		type = REDIR_HEREDOC;
 	else
-		redir->type = REDIR_IN;
+		type = REDIR_IN;
+	redir = new_redir(type);
+	if (!redir)
+		return ;
 	*tokens = (*tokens)->next;
 	if (*tokens && (*tokens)->type == TK_WORD)
 	{
-		if (redir->type == REDIR_HEREDOC && (*tokens)->no_expand)
-		{
-			tmp = ft_strjoin((*tokens)->value, "\"");
-			redir->target = ft_strjoin("\"", tmp);
-			free(tmp);
-		}
+		if (type == REDIR_HEREDOC && (*tokens)->no_expand)
+			redir->target = quoted_target((*tokens)->value);
 		else
 			redir->target = ft_strdup((*tokens)->value);
 	}
-	else
-		redir->target = NULL;
-	redir->next = NULL;
 	redir_add_back(&current_cmd->redirs, redir);
 }
 
 void	parse_redir_out(t_cmd *current_cmd, t_token **tokens)
 {
-	t_redir	*redir;
+	t_redir			*redir;
+	t_redir_type	type;
 
-	redir = malloc(sizeof(t_redir));
+	if ((*tokens)->type == TK_APPEND)
+		type = REDIR_APPEND;
+	else
+		type = REDIR_OUT;
+	redir = new_redir(type);
 	if (!redir)
 		return ;
-	if ((*tokens)->type == TK_APPEND)
-		redir->type = REDIR_APPEND;
-	else
-		redir->type = REDIR_OUT;
 	*tokens = (*tokens)->next;
 	if (*tokens && (*tokens)->type == TK_WORD)
 		redir->target = ft_strdup((*tokens)->value);
-	else
-		redir->target = NULL;
-	redir->next = NULL;
 	redir_add_back(&current_cmd->redirs, redir);
 }
